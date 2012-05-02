@@ -1,0 +1,19 @@
+solution_one_vote_like_one:
+  solution: "solution_one" 
+  user: "tom"
+  like: true
+
+solution_one_vote_unlike_one:
+  solution: "solution_one" 
+  user: "jack"
+  like: false
+
+solution_one_vote_unlike_two:
+  solution: "solution_one" 
+  user: "zhang"
+  like: false
+
+solution_in_the_work_vote_like:
+  solution: "solution_in_the_work" 
+  user: "tom"
+  like: true

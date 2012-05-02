@@ -1,0 +1,29 @@
+<div class="row" id="comment-<%= comment.id %>">
+  <div class="span7 seperator"></div>
+  <div class="span6">
+	<div class="comment-profile"><%= link_to image_tag(comment.user.avatar.url(:thumb),:class=>"profile_picture_small"),user_path(comment.user) %></div>
+	<div class="comment">
+	  <div class="comment-info"><%= link_to comment.user.username,user_path(comment.user) %></div>
+	  <div class="comment-entry"><%= comment.content %></div>
+	  <div class="comment-date shallow"><%= distance_of_time_in_words_to_now comment.created_at %></div>
+	</div>
+  </div>
+  <div class="span1">
+	<ul class="unstyled actions">
+	  <%= edit_comment_link comment %>
+	  <%= del_comment_link comment %>
+    </ul>
+  </div>
+</div>
+<div class="row" id="edit-comment-<%=comment.id%>" style="display:none">
+  <div class="span7 seperator"></div>
+  <div class="span7">
+    <%= form_for(comment,:remote => true,:html =>{:class=>"well"}) do |f| %>
+      <a class="close" data-comment="<%= comment.id %>" style="cursor:hand">&times;</a>
+      <%= f.label :content %>
+	  <%= f.text_area :content,:class => "span6",:style => "height:80px;overflow-y:auto" %>
+      <p class="help-block">不支持HTML，请输入普通文本</p>
+      <%= f.submit "修改",:class=>"btn btn-primary",:style=>"margin-top:5px" %>
+	<% end %>
+  </div>
+</div>

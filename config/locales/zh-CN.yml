@@ -1,0 +1,110 @@
+zh-CN:
+  #for paginate
+  will_paginate:
+    previous_label: "« 上一页"
+    next_label: "下一页 »"
+    page_gap: "…"
+  #for cancan
+  unauthorized:
+   manage:
+      all: "您的权限不够"
+  #for activerecord field
+  activerecord:
+    attributes:
+      idea:
+        title: "主意"
+        description: "内容"
+        tag_names: "标签"
+        tags: "标签"
+        status: "状态"
+        topic: "主题"
+      user:
+        username: "用户名"
+        password: "密码"
+        password_confirmation: "确认密码"
+        current_password: "当前密码"
+        email: "电子邮箱"
+        remember_me: "记住我"
+        login: "用户名或电子邮件地址"
+        terms_of_service: "《网站使用协议》"
+        description: "自我介绍"
+        website: "个人主页"
+        owner: "网站持有者"
+        admin: "管理员"
+        normal: "注册用户"
+        avatar_file_size: "头像大小"
+        avatar_content_type: "头像格式"
+      comment:
+        content: "评论"
+      solution:
+        title: "方案"
+        content: "描述"
+      topic:
+        name: "主题名称"
+      preference:
+        value: "设置项值"
+  #for application
+  app:
+    error:
+      head: "请改正如下错误"
+      topic:
+        zero_ideas: "不能删除主意数量不为零的主题"
+      user:
+        username_format: "只能包含字母和数字"
+        avatar_size: "最大为50KB"
+        avatar_content_type: "只能为JPEG和PNG"
+      idea:
+        tags_number: "不能超过3个"
+        status: "修改主意为 %{status} 失败"
+        pick_solution: "请选择实施主意的方案"
+        launched: "主意已经实施，不能再修改状态"
+        edit: "是实施中或已实施的主意不能被修改"
+      solution:
+        create: "实施中或已实施的主意不能添加建议"
+        update: "实施中或已实施的主意不能修改其建议"
+        destroy: "实施中或已实施的主意不能删除其建议"
+      vote:
+        voting: "只有审核通过的主意，才能给其解决方案投票"
+    notice:
+      user:
+        edit: "修改成功"
+    user:
+      admin:
+        radio_yes: "是"
+        radio_no: "否"
+    idea:
+      status:
+        under_review: "审核中"
+        reviewed_success: "审核通过"
+        reviewed_fail: "审核不通过"
+        in_the_works: "实施中"
+        launched: "已实施"
+      fail:
+        repeated: "重复"
+        launched: "已经实施过"
+        invalid: "不合格"
+      success: "通过" 
+      handle: 
+        under_review: "开始审核"
+        reviewed_fail: "重新审核"
+        reviewed_success: "开始实施"
+        in_the_works: "完成实施"
+      favoriate: "关注动向"
+      unfavoriate: "取消关注"
+      edit: "修改"
+    comment:
+      new: "发布评论"
+      edit: "修改"
+      del: "删除"
+    solution:
+      new: "给个建议"
+      edit: "修改"
+      del: "删除"
+      vote:
+        like: "赞成"
+        unlike: "不赞成"
+      unvote:
+        like: "取消赞成"
+        unlike: "取消不赞成"
+    preference:
+      site_name: "站点名称"

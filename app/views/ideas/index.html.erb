@@ -1,0 +1,26 @@
+<%= flash_msg_tag flash[:alert],"alert-error" %>
+<%= flash_msg_tag flash[:notice],"alert-success" %>
+<ul class="nav nav-tabs" id="nav-status">
+  <li><%= link_to '审核中',tab_ideas_path(:status => IDEA_STATUS_UNDER_REVIEW),:remote=>true %></li>
+  <li><%= link_to '审核不通过',tab_ideas_path(:status => IDEA_STATUS_REVIEWED_FAIL),:remote=>true  %></li>
+  <li class="active"><%= link_to '审核通过的',tab_ideas_path(:status => IDEA_STATUS_REVIEWED_SUCCESS),:remote=>true  %></li>
+  <li><%= link_to '实施中',tab_ideas_path(:status => IDEA_STATUS_IN_THE_WORKS),:remote=>true  %></li>
+  <li><%= link_to '已实施',tab_ideas_path(:status => IDEA_STATUS_LAUNCHED),:remote=>true  %></li>
+</ul>
+<div id="ideas-main">
+  <div class="row">
+	  <div class="span2 offset7">
+		<select class="span2">
+		  <option>最新的</option>
+		  <option>24小时内最热门的</option>
+		  <option>7天内最热门的</option>
+		  <option>30天内最热门的</option>
+		  <option>6个月内最热门的</option>
+		  <option>到现在最热门的</option>
+		  <option>最新评论的</option>
+		</select>
+	  </div>
+  </div>
+  <%= render @ideas %>
+  <%= will_paginate @ideas,:class => "pagination pagination-right",:id => "ideas-pagination",:params => {:controller => "ideas",:action => "tab",:status => IDEA_STATUS_REVIEWED_SUCCESS} %>
+</div>

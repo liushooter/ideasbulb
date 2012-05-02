@@ -1,0 +1,11 @@
+.bundle
+db/*.sqlite3
+log/
+tmp/
+.sass-cache/
+*~
+.*.swp
+solr/data/
+solr/pids/
+public/system/
+public/assets/

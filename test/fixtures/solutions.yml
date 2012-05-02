@@ -1,0 +1,27 @@
+solution_one:
+  title: 一二三四五六七八九十
+  content: 一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十
+  points: 1
+  idea: "reviewed_success" 
+  user: "tom"
+
+solution_two:
+  title: MyString
+  content: MyText
+  points: 1
+  idea: "reviewed_success" 
+  user: "jack"
+
+solution_in_the_work:
+  title: MyString
+  content: MyText
+  points: 1
+  idea: "in_the_works" 
+  user: "tom"
+
+solution_launched:
+  title: MyString
+  content: MyText
+  points: 1
+  idea: "launched" 
+  user: "tom"

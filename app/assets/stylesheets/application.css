@@ -1,0 +1,141 @@
+/*
+ *= require_tree . 
+ *= require_self
+*/
+body {
+  background-color: #eee;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 13px;
+  padding-top: 40px;
+  word-wrap: break-word;
+}
+.container > footer p {
+  text-align: center; 
+}
+.container > .content,.container-fluid > .content {
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 -20px;
+  -webkit-border-radius: 0 0 6px 6px;
+  -moz-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+.sidebar-nav {
+ padding: 9px 0;
+}
+.footer-nav{
+	text-align: center;
+	margin: 20px 0;
+}
+.footer-nav > li{
+	padding:20px 4px;
+	display: inline;
+}
+.field_with_errors{
+  display: inline;
+}
+.label{
+  font-size:13px;
+}
+img.profile_picture_medium {
+  width: 120px;
+  height: 120px;
+  padding: 2px;
+  border:1px solid #DDD;
+}
+img.profile_picture {
+  width: 50px;
+  height: 50px;
+  padding: 2px;
+  border:1px solid #DDD;
+}
+img.profile_picture_small {
+  width: 32px;
+  height: 32px;
+  padding: 2px;
+  border:1px solid #DDD;
+}
+.plain{
+  color: #08C;
+}
+.shallow{
+  color: #999;
+}
+.highlight{
+  color:#F89406;
+}
+.pick{
+  background-color:#6dcff6
+}
+span.bold{
+  font-weight:bold;
+}
+div.seperator{
+  padding-top:18px;
+  border-top: 1px solid #DDD;
+}
+div.idea-title{
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 100;
+}
+div.idea-label,div.idea-info,div.idea-entry{
+  margin:5px 0;
+}
+div.idea-label span{
+ margin-right:10px;
+}
+ul.actions{
+  margin-bottom:0;
+}
+ul.actions li{
+  margin-bottom:5px;
+}
+div.solution-profile,div.comment-profile{
+  float: left;
+  width: 32px;
+}
+div.solution,div.comment{
+  margin-left: 10px;
+  float: left;
+  width: 418px;
+}
+div.solution-date,div.solution-entry{
+  margin:5px 0;
+}
+div.comment-date,div.comment-entry{
+  margin:5px 0;
+}
+div.page{
+  padding-top:10px;
+  border-top: 1px solid #DDD;
+}
+ul.hot-tags{
+  padding-left:15px;
+}
+ul.hot-tags li{
+	margin:10px 0;
+}
+div.show-more{
+  padding:5px 0;
+  background:  #DDD;
+  text-align:center;
+}
+form.login-dropdown{
+ margin:10px;
+}
+ul.favor-avatar li{
+ float:left;
+ margin:2px;
+}
+ul.user-info li{
+ margin-top:5px;
+}
+p.more-ideas{
+ padding-top:5px;
+ border-top:1px dashed #EEE;
+ text-align:right;
+}

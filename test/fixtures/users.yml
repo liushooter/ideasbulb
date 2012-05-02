@@ -1,0 +1,19 @@
+jack:
+  username: jack
+  email: jack@gmail.com
+  encrypted_password: <%= User.new(:password => '123456').encrypted_password %>
+  confirmed_at: <%= Time.now %>
+  admin: true
+  description: abcdefghij
+
+tom:
+  username: tom
+  email: tom@gmail.com
+  encrypted_password: <%= User.new(:password => '123456').encrypted_password %>
+  confirmed_at: <%= Time.now %>
+
+zhang:
+  username: zhang
+  email: zhang@gmail.com
+  encrypted_password: <%= User.new(:password => '123456').encrypted_password %>
+  confirmed_at: <%= Time.now %>

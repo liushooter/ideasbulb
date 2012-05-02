@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IdeasBulb</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <%= link_to image_tag("logo_right.png"),root_path,:class=>"brand" %>
+        <ul class="nav">
+          <li class="active"><%= link_to "网站主页",root_path %></li>
+          <% if can? :dashboard,Preference %>
+            <li><%= link_to "控制面板",dashboard_preferences_path,:id => "dashboard" %></li>
+          <% end %>
+        </ul>
+        <ul class="nav pull-right">
+          <li id="inbox"><a href="#" rel="tooltip" data-original-title="消息" data-placement="bottom"><span class="label label-important" style="display:inline-block;width:18px;height:18px;text-align:center;font-size:14px">99</span></a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.username %><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%=link_to '修改个人资料',edit_user_path(current_user) %></li>
+              <li><%=link_to '修改邮箱或密码',edit_user_registration_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "注销",destroy_user_session_path,:method => :delete %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+  <div class="content">
+    <div class="row-fluid">
+      <div class="span3">
+        <div class="well sidebar-nav">
+          <ul class="nav nav-list">
+            <li class="active"><%= link_to dashboard_preferences_path,:remote => true,:id => "nav-home" do %><i class="icon-home icon-white"></i> 首页<% end %></li>
+			<li><%= link_to topics_path,:remote => true,:id => "nav-topic" do %><i class="icon-list"></i> 主题管理<% end %></li>
+			<li><%= link_to users_path,:remote => true,:id => "nav-user" do %><i class="icon-user"></i> 用户管理<% end %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="span9" id="admin-main">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  <%= render "common/footer"%>
+  </div>
+</body>
+</html>
