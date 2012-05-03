@@ -1,0 +1,36 @@
+h2. IdeasBulb
+
+"IdeasBulb":http://www.ideasbulb.com/ 这款Web应用是为帮助您的公司和自己客户快速沟通交流的平台，客户可以通过这样一个平台发布自己对产品和服务的主意，如果有客户发现这些主意对自己也有所帮助，可以对这些主意投票或评论，客户在这个平台内互相交流的同时，也同公司互动，公司发现了客户的好主意，可以将其纳入自己产品和服务中，公司成长了，客户也满意了，双赢。
+
+h2. 版本
+
+版本发布基于Semantic Versioning原则
+
+版本号数字格式如下:
+
+bq. major.minor.patch
+
+构建基于如下的原则:
+
+* major的改变会破坏向后的兼容性，同时重置minor和patch
+* minor的改变保证向后的兼容性，同时重置patch
+* patch的改变属于修复Bug
+
+了解更多 "Semantic Versioning":http://semver.org/
+
+h2. 错误跟踪
+
+发现Bug? 请在GitHub创建issue!
+
+"https://github.com/danjiang/ideasbulb/issues":https://github.com/danjiang/ideasbulb/issues
+
+h2. 作者
+
+但江(danjiang5956@gmail.com)
+"http://twitter.com/dandan5956":http://twitter.com/dandan5956
+"http://www.danthought.com":http://www.danthought.com
+
+h2. 开源协议
+
+基于MIT协议
+"www.opensource.org/licenses/MIT":http://www.opensource.org/licenses/MIT
