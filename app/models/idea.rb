@@ -17,11 +17,11 @@ class Idea < ActiveRecord::Base
   validate :tags_number_not_greater_than_three
 
   after_create do |idea|
-    User.update_points(idea.user_id,USER_NEW_IDEA_POINTS) unless is_handle
+    User.update_points(idea.user_id,USER_NEW_IDEA_POINTS)
   end
   
   after_save do |idea|
-    Tag.update_count(self.tmp_tag_ids)
+    Tag.update_count(self.tmp_tag_ids) unless is_handle
   end
 
   before_update do |idea|
