@@ -19,8 +19,7 @@ class Vote < ActiveRecord::Base
   end
   
   after_create do |vote|
-    vote.user.points += 1
-    vote.user.save
+    User.update_points(vote.user_id,USER_VOTE_POINTS)
   end
 
   private

@@ -5,8 +5,7 @@ class Comment < ActiveRecord::Base
   validates :content,:presence =>true,:length => {:maximum => 1000}
 
   after_create do |comment|
-    comment.user.points += 1
-    comment.user.save
+    User.update_points(comment.user_id,USER_NEW_COMMENT_POINTS)
   end 
 
 end

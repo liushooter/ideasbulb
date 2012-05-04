@@ -19,6 +19,10 @@ class Solution < ActiveRecord::Base
     check_status(solution.idea.status,'app.error.solution.destroy')
   end
 
+  after_create do |solution|
+    User.update_points(solution.user_id,USER_NEW_SOLUTION_POINTS)
+  end
+
   def self.update_points(solution_id)
     connection.update("UPDATE solutions SET points = 
     (SELECT COUNT( * ) FROM `votes` WHERE `solution_id` = #{solution_id} AND `like` =1 )

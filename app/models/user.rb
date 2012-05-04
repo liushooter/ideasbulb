@@ -36,4 +36,7 @@ class User < ActiveRecord::Base
     where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.strip.downcase }]).first
   end
 
+  def self.update_points(user_id,points)
+    connection.update("UPDATE `users` set `points` = `points` + #{points} WHERE `id` = #{user_id}")
+  end
 end

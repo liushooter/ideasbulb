@@ -17,8 +17,7 @@ class Idea < ActiveRecord::Base
   validate :tags_number_not_greater_than_three
 
   after_create do |idea|
-    idea.user.points += 3
-    idea.user.save
+    User.update_points(idea.user_id,USER_NEW_IDEA_POINTS)
   end
   
   after_save do |idea|
