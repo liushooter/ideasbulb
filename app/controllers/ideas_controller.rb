@@ -2,7 +2,14 @@ class IdeasController < ApplicationController
   authorize_resource
 
   def index
-    @ideas = Idea.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where("status=?",IDEA_STATUS_REVIEWED_SUCCESS)
+    @status = params[:status ] ? params[:status] : IDEA_STATUS_REVIEWED_SUCCESS
+    conditions = {}
+    conditions[:status] = @status 
+    if params[:topic_id]
+      @topic_id = params[:topic_id].to_i
+      conditions[:topic_id] = @topic_id 
+    end
+    @ideas = Idea.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions)
     render :layout => "list"
   end
 

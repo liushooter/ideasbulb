@@ -1,7 +1,7 @@
 module IdeasHelper
 
   def status_span_tag(idea)
-    content_tag :span,I18n.t("app.idea.status.#{idea.status}"),:class => "plain bold"
+    content_tag :span,link_to(I18n.t("app.idea.status.#{idea.status}"),root_path(:status => idea.status)),:class => "bold"
   end
 
   def fail_span_tag(idea)

@@ -1,11 +1,11 @@
 <%= flash_msg_tag flash[:alert],"alert-error" %>
 <%= flash_msg_tag flash[:notice],"alert-success" %>
 <ul class="nav nav-tabs" id="nav-status">
-  <li><%= link_to '审核中',tab_ideas_path(:status => IDEA_STATUS_UNDER_REVIEW),:remote=>true %></li>
-  <li><%= link_to '审核不通过',tab_ideas_path(:status => IDEA_STATUS_REVIEWED_FAIL),:remote=>true  %></li>
-  <li class="active"><%= link_to '审核通过的',tab_ideas_path(:status => IDEA_STATUS_REVIEWED_SUCCESS),:remote=>true  %></li>
-  <li><%= link_to '实施中',tab_ideas_path(:status => IDEA_STATUS_IN_THE_WORKS),:remote=>true  %></li>
-  <li><%= link_to '已实施',tab_ideas_path(:status => IDEA_STATUS_LAUNCHED),:remote=>true  %></li>
+  <%= tab_item_tag IDEA_STATUS_UNDER_REVIEW,@status do %><%= link_to '审核中',tab_ideas_path(:status => IDEA_STATUS_UNDER_REVIEW),:remote=>true %><% end %>
+  <%= tab_item_tag IDEA_STATUS_REVIEWED_FAIL,@status do %><%= link_to '审核不通过',tab_ideas_path(:status => IDEA_STATUS_REVIEWED_FAIL),:remote=>true  %><% end %>
+  <%= tab_item_tag IDEA_STATUS_REVIEWED_SUCCESS,@status do %><%= link_to '审核通过的',tab_ideas_path(:status => IDEA_STATUS_REVIEWED_SUCCESS),:remote=>true  %><% end %>
+  <%= tab_item_tag IDEA_STATUS_IN_THE_WORKS,@status do %><%= link_to '实施中',tab_ideas_path(:status => IDEA_STATUS_IN_THE_WORKS),:remote=>true  %><% end %>
+  <%= tab_item_tag IDEA_STATUS_LAUNCHED,@status do %><%= link_to '已实施',tab_ideas_path(:status => IDEA_STATUS_LAUNCHED),:remote=>true  %><% end %>
 </ul>
 <div id="ideas-main">
   <div class="row">

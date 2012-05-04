@@ -16,4 +16,9 @@ module ApplicationHelper
       end
     end
   end
+
+  def tab_item_tag(expectation,actual,options={},&block)
+    options = options.merge(:class => "active") if expectation == actual
+    content_tag(:li,options,&block) 
+  end
 end

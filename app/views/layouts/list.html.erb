@@ -25,7 +25,7 @@
 		  <% end %>
           <% if user_signed_in? %>
 		    <ul class="nav nav-pills nav-stacked" id="nav-owner-ideas">
-			  <li class="active"><%= link_to '所有的主意',tab_ideas_path(:all => true),:remote=>true %></li>
+			  <%= tab_item_tag nil,@topic_id do %><%= link_to '所有的主意',tab_ideas_path(:all => true),:remote=>true %><% end %>
 			  <li><%= link_to '发布的主意',tab_ideas_path(:user_id => current_user.id),:remote=>true %></li>
 			  <li><%= link_to '关注的主意',tab_ideas_path(:favorer_id => current_user.id),:remote=>true %></li>
 		    </ul>
@@ -34,7 +34,7 @@
 		    <h4>主题</h4>
 		    <ul class="nav nav-pills nav-stacked" id="nav-topic-ideas">
               <% Topic.all.each do |topic| %>
-			    <li><%= link_to tab_ideas_path(:topic_id => topic.id),:remote=>true do %><i class="icon-list"></i>&nbsp;<%= topic.name %><% end %></li>
+			    <%= tab_item_tag topic.id,@topic_id do %><%= link_to tab_ideas_path(:topic_id => topic.id),:remote=>true do %><i class="icon-list"></i>&nbsp;<%= topic.name %><% end %><% end %>
               <% end %>
 	        </ul>
           <% end %>
