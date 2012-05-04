@@ -6,4 +6,11 @@ class Tag < ActiveRecord::Base
       Tag.find_or_create_by_name(name)
     end
   end
+
+  def self.update_count(tags_id)
+    connection.update("UPDATE `tags` SET `ideas_count`=
+    (SELECT count(*) FROM `ideas_tags` WHERE `tag_id` = `id`) 
+    WHERE `id` in (#{tags_id.join(',')})")
+  end
+
 end

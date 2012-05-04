@@ -9,8 +9,8 @@ class Idea < ActiveRecord::Base
 
   self.per_page = 30
 
-  attr_accessor :tags_count
   attr_accessor :is_handle
+  attr_accessor :tmp_tag_ids
 
   validates :title,:presence =>true,:length => {:maximum => 60}
   validates :description,:presence =>true,:length => {:maximum => 2000}
@@ -19,10 +19,10 @@ class Idea < ActiveRecord::Base
   after_create do |idea|
     idea.user.points += 3
     idea.user.save
-    idea.tags.each do |tag|
-      tag.ideas_count = tag.ideas_count+1
-      tag.save
-    end
+  end
+  
+  after_save do |idea|
+    Tag.update_count(self.tmp_tag_ids)
   end
 
   before_update do |idea|
@@ -37,7 +37,11 @@ class Idea < ActiveRecord::Base
   end
 
   def tag_names=(names)
+    self.tmp_tag_ids = self.tags.collect{|tag| tag.id}
     self.tags = Tag.with_names(names.split(/\s+/))
+    self.tags.each do |tag|
+      self.tmp_tag_ids << tag.id unless self.tmp_tag_ids.include?(tag.id)
+    end
   end
 
   def tag_names
