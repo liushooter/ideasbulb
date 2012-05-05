@@ -7,20 +7,14 @@
   <%= tab_item_tag IDEA_STATUS_IN_THE_WORKS,@status do %><%= link_to '实施中',tab_ideas_path(:status => IDEA_STATUS_IN_THE_WORKS),:remote=>true  %><% end %>
   <%= tab_item_tag IDEA_STATUS_LAUNCHED,@status do %><%= link_to '已实施',tab_ideas_path(:status => IDEA_STATUS_LAUNCHED),:remote=>true  %><% end %>
 </ul>
-<div id="ideas-main">
-  <div class="row">
-	  <div class="span2 offset7">
-		<select class="span2">
-		  <option>最新的</option>
-		  <option>24小时内最热门的</option>
-		  <option>7天内最热门的</option>
-		  <option>30天内最热门的</option>
-		  <option>6个月内最热门的</option>
-		  <option>到现在最热门的</option>
-		  <option>最新评论的</option>
-		</select>
-	  </div>
+<div class="row">
+  <div class="span2 offset7">
+    <%= form_tag tab_ideas_path,:method => :get ,:remote => true,:id=>"ideas-sort-form" do %>    
+      <%= select_tag(:sort, options_for_select([['最热门', IDEAS_SORT_HOT], ['最新的', IDEAS_SORT_NEWEST]]),:class=>"span2",:id=>"ideas-sort-select") %>
+    <% end %>
   </div>
-  <%= render @ideas %>
+</div>
+<div id="ideas-main">
+   <%= render @ideas %>
   <%= will_paginate @ideas,:class => "pagination pagination-right",:id => "ideas-pagination",:params => {:controller => "ideas",:action => "tab",:status => IDEA_STATUS_REVIEWED_SUCCESS} %>
 </div>

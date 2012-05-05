@@ -4,7 +4,7 @@
       <%= link_to image_tag("logo_right.png"),root_path,:class=>"brand" %>
       <% if user_signed_in? %>
 	    <form action="#" class="navbar-form pull-left">
-		  <input type="text" placeholder="输入你的好主意">
+		  <input type="text" placeholder="输入你的好主意" id="nav-idea-title-input">
           <button data-toggle="modal" data-target="#modal-add-idea" class="btn" type="submit">发布</button>
 		</form>
       <% end %>
@@ -45,7 +45,7 @@
     <div class="row">
       <div class="span5 offset1">
 	    <%= f.label :title %>
-        <%= f.text_field :title, :class => "span5" %>
+        <%= f.text_field :title, :class => "span5", :id => "add-idea-title-input" %>
 	    <%= f.label :description %>
 	    <%= f.text_area :description,:class=>"span5",:style => "height:100px;overflow-y:auto" %>
 	    <%= f.label :tag_names %>

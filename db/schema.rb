@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412092811) do
+ActiveRecord::Schema.define(:version => 20120505070411) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -33,14 +33,15 @@ ActiveRecord::Schema.define(:version => 20120412092811) do
   create_table "ideas", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "status",          :default => "0"
+    t.string   "status",           :default => "0"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "comments_count",  :default => 0
+    t.integer  "comments_count",   :default => 0
     t.integer  "topic_id"
-    t.integer  "solutions_count", :default => 0
+    t.integer  "solutions_count",  :default => 0
     t.string   "fail"
+    t.integer  "solutions_points", :default => 0
   end
 
   create_table "ideas_tags", :id => false, :force => true do |t|

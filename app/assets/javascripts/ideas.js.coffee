@@ -59,22 +59,32 @@ initStatusTab = ->
  $('#nav-status a')
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
    activeLinkParam = getActiveLinkParam('#nav-owner-ideas')
-   settings.url = settings.url+"&"+(activeLinkParam or= getActiveLinkParam('#nav-topic-ideas'))
+   settings.url = settings.url+"&"+(activeLinkParam or= getActiveLinkParam('#nav-topic-ideas'))+"&sort="+$('#ideas-sort-select').val()
    active(this))
   .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
 
 initRightNav = ->
  $('#nav-owner-ideas a')
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
-   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')
+   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')+"&sort="+$('#ideas-sort-select').val()
    $('#nav-topic-ideas').children().removeClass("active").find("i").removeClass("icon-white")
    active(this))
   .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
  $('#nav-topic-ideas a')
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
-   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')
+   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')+"&sort="+$('#ideas-sort-select').val()
    $('#nav-owner-ideas').children().removeClass("active")
    activeIcon(this))
+  .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
+
+initSortSelect = ->
+ sortForm = $('#ideas-sort-form')
+ $('#ideas-sort-select').change -> sortForm.submit()
+ sortForm
+  .bind("ajax:beforeSend",(evt,xhr,settings) ->
+   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')
+   activeLinkParam = getActiveLinkParam('#nav-owner-ideas')
+   settings.url = settings.url+"&"+(activeLinkParam or= getActiveLinkParam('#nav-topic-ideas')))
   .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
 
 initIdeas = (html) ->
@@ -83,6 +93,7 @@ initIdeas = (html) ->
  else
   initStatusTab()
   initRightNav()
+  initSortSelect()
  $('.comment-btn').click -> showForm("#add-comment-",this)
  $('.solution-btn').click -> showForm("#add-solution-",this)
  $('.show-more > a').click -> showMore(this)
@@ -123,3 +134,4 @@ jQuery ($) ->
  $('#inbox').tooltip selector: "a[rel=tooltip]"
  initIdeas() if $('#ideas-main').length > 0
  initIdea() if $('#idea-main').length > 0
+ $('#modal-add-idea').on('show', -> $('#add-idea-title-input').val($('#nav-idea-title-input').val()))

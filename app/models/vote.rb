@@ -12,10 +12,12 @@ class Vote < ActiveRecord::Base
 
   after_save do |vote|
     Solution.update_points(vote.solution_id)
+    Idea.update_solutions_points(vote.solution.idea_id)
   end
 
   after_destroy do |vote|
     Solution.update_points(vote.solution_id)
+    Idea.update_solutions_points(vote.solution.idea_id)
   end
   
   after_create do |vote|

@@ -52,4 +52,8 @@ class Idea < ActiveRecord::Base
       errors.add(:tags,I18n.t('app.error.idea.tags_number'))
     end
   end
+
+  def self.update_solutions_points(idea_id)
+    connection.update("UPDATE `ideas` SET `solutions_points` = (SELECT SUM(`points`) FROM `solutions` WHERE `idea_id` = #{idea_id}) WHERE `id` = #{idea_id}")
+  end
 end

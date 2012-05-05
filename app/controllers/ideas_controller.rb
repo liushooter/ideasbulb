@@ -9,7 +9,7 @@ class IdeasController < ApplicationController
       @topic_id = params[:topic_id].to_i
       conditions[:topic_id] = @topic_id 
     end
-    @ideas = Idea.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions)
+    @ideas = Idea.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions).order(hot_sort)
     render :layout => "list"
   end
 
@@ -82,10 +82,17 @@ class IdeasController < ApplicationController
     conditions[:status] = params[:status] if params[:status] 
     conditions[:topic_id] = params[:topic_id] if params[:topic_id]
     conditions[:user_id] = params[:user_id] if params[:user_id]
-    if params[:favorer_id]
-      @ideas = User.find(params[:favorer_id]).favored_ideas.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions)
+    if IDEAS_SORT_HOT == params[:sort]
+      sort = hot_sort 
+    elsif IDEAS_SORT_NEWEST == params[:sort]
+      sort = "created_at DESC"
     else
-      @ideas = Idea.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions)
+      sort = hot_sort 
+    end
+    if params[:favorer_id]
+      @ideas = User.find(params[:favorer_id]).favored_ideas.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions).order(sort)
+    else
+      @ideas = Idea.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions).order(sort)
     end
     render :layout => false
   end
@@ -110,5 +117,9 @@ class IdeasController < ApplicationController
     if params[:status] != status
         flash[:alert] = I18n.t('app.error.idea.status',:status => I18n.t("app.idea.status.#{status}"))
     end
+  end
+
+  def hot_sort
+    "(2*`solutions_count`+`comments_count`+`solutions_points`)/POW(TIMESTAMPDIFF(HOUR,`created_at`,NOW())+2,1.5) DESC" 
   end
 end
