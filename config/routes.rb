@@ -18,6 +18,7 @@ Ideasbulb::Application.routes.draw do
   end
   resources :preferences do
     get 'dashboard',:on => :collection
+    put 'update_basic',:on => :collection
   end
   resources :votes
 end

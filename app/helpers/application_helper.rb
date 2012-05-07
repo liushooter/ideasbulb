@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def flash_msg_tag(msg,className)
     if msg
-      content_tag :div,:class => "alert #{className} fade in" do
+      content_tag :div,:id => "flash-msg" , :class => "alert #{className} fade in" do
         [link_to("×","javascript:;",:class=>"close","data-dismiss"=>"alert"),msg].join.html_safe
       end
     end

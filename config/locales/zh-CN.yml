@@ -41,8 +41,6 @@ zh-CN:
         content: "描述"
       topic:
         name: "主题名称"
-      preference:
-        value: "设置项值"
   #for application
   app:
     error:
@@ -65,9 +63,13 @@ zh-CN:
         destroy: "实施中或已实施的主意不能删除其建议"
       vote:
         voting: "只有审核通过的主意，才能给其解决方案投票"
+      preference:
+        update: "设置项 %{name} 的值不能为空"
     notice:
       user:
         edit: "修改成功"
+      preference:
+        update: "修改成功"
     user:
       admin:
         radio_yes: "是"

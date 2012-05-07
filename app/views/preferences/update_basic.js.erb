@@ -1,0 +1,3 @@
+$('#flash-msg').remove()
+$('#preference-form').before('<%= flash_msg_tag flash[:alert],"alert-error" %>')
+$('#preference-form').before('<%= flash_msg_tag flash[:notice],"alert-success" %>')

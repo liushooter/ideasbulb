@@ -10,11 +10,11 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <%= link_to image_tag("logo_right.png"),root_path,:class=>"brand" %>
+        <%= link_to Preference.option(PREFERENCE_SITE_NAME),root_path,:class=>"brand" %>
         <ul class="nav">
-          <li class="active"><%= link_to "网站主页",root_path %></li>
+          <li><%= link_to "网站主页",root_path %></li>
           <% if can? :dashboard,Preference %>
-            <li><%= link_to "控制面板",dashboard_preferences_path,:id => "dashboard" %></li>
+            <li class="active"><%= link_to "控制面板",dashboard_preferences_path,:id => "dashboard" %></li>
           <% end %>
         </ul>
         <ul class="nav pull-right">
@@ -41,6 +41,7 @@
             <li class="active"><%= link_to dashboard_preferences_path,:remote => true,:id => "nav-home" do %><i class="icon-home icon-white"></i> 首页<% end %></li>
 			<li><%= link_to topics_path,:remote => true,:id => "nav-topic" do %><i class="icon-list"></i> 主题管理<% end %></li>
 			<li><%= link_to users_path,:remote => true,:id => "nav-user" do %><i class="icon-user"></i> 用户管理<% end %></li>
+			<li><%= link_to preferences_path,:remote => true,:id => "nav-setting" do %><i class="icon-cog"></i> 站点设置<% end %></li>
           </ul>
         </div>
       </div>

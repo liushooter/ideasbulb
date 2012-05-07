@@ -44,3 +44,6 @@ jQuery ($) ->
  $('#nav-user')
   .bind("ajax:beforeSend",(evt,xhr,settings) -> active(this))
   .bind("ajax:success",(evt,data,status,xhr) -> initNavUser(xhr.responseText))
+ $('#nav-setting')
+  .bind("ajax:beforeSend",(evt,xhr,settings) -> active(this))
+  .bind("ajax:success",(evt,data,status,xhr) -> fill(xhr.responseText))
