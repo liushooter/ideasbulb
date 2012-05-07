@@ -6,6 +6,7 @@ class Comment < ActiveRecord::Base
 
   after_create do |comment|
     User.update_points(comment.user_id,USER_NEW_COMMENT_POINTS)
+    Message.make_comment_message(comment)
   end 
 
 end

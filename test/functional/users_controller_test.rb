@@ -81,4 +81,15 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal I18n.t('unauthorized.manage.all'),flash[:alert]
   end
 
+  test "everybody not get inbox" do
+    get :inbox
+    assert_redirected_to root_path
+    assert_equal I18n.t('unauthorized.manage.all'),flash[:alert]
+  end
+
+  test "login user get inbox" do
+    sign_in @tom
+    get :inbox
+    assert_response :success
+  end
 end

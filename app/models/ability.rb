@@ -8,7 +8,7 @@ class Ability
       can [:promotion,:create,:update,:favoriate,:unfavoriate], Idea
       can :manage, Comment
       can :manage, Solution
-      can [:edit,:update], User
+      can [:edit,:update,:inbox], User
       can :manage, Vote
 
       if user.admin?
