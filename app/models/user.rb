@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :commented_ideas,:through => :comments,:source =>:idea
   has_many :comments
   has_many :solutions
+  has_many :messages
   has_attached_file :avatar, :styles => { :medium => "120x120#", :small => "50x50#", :thumb => "32x32#" },:url => "/system/:attachment/:id/:style/:filename",:whiny => false
 
   self.per_page = 10

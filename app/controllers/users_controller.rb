@@ -36,4 +36,8 @@ class UsersController < ApplicationController
     end
   end
 
+  def inbox
+    @messages = current_user.messages.order("created_at DESC")
+  end
+
 end

@@ -1,0 +1,7 @@
+<p><%= @user.username %>，您好！</p>
+<p>您发布的主意 <%= link_to @idea.title,idea_url(@idea) %>，有了新的建议。</p>
+<p><%= link_to @creator.username,user_url(@creator) %> 建议："<%= @solution.title %>"</p>
+查看建议：<%= link_to idea_url(@idea),idea_url(@idea) %>
+<p>如果以上链接无法点击，请将上面的地址复制到你的浏览器的地址栏（浏览器上方输入网址的框）进行访问。</p>
+<p>此邮件自动发送，无需回复。</p>
+

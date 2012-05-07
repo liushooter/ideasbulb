@@ -16,7 +16,8 @@
       </ul>
       <ul class="nav pull-right">
         <% if user_signed_in? %>
-          <li id="inbox"><a href="#" rel="tooltip" data-original-title="消息" data-placement="bottom"><span class="label label-important" style="display:inline-block;width:18px;height:18px;text-align:center;font-size:14px">99</span></a></li>
+          <li id="inbox"><%= link_to inbox_users_path,:rel=>"tooltip","data-original-title"=>"消息","data-placement"=>"bottom" do %><i class="icon-inbox icon-white"></i><% end %></li>
+
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.username %><b class="caret"></b></a>
             <ul class="dropdown-menu">
