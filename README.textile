@@ -1,6 +1,6 @@
 h2. IdeasBulb
 
-"IdeasBulb":http://www.ideasbulb.com/ 这款Web应用是为帮助您的公司和自己客户快速沟通交流的平台，客户可以通过这样一个平台发布自己对产品和服务的主意，如果有客户发现这些主意对自己也有所帮助，可以对这些主意投票或评论，客户在这个平台内互相交流的同时，也同公司互动，公司发现了客户的好主意，可以将其纳入自己产品和服务中，公司成长了，客户也满意了，双赢。
+"IdeasBulb":http://www.ideasbulb.com/ 是为帮助您的公司和自己客户快速沟通交流的Web软件，客户通过IdeasBulb发布自己对公司产品和服务的想法和主意，提供主意的解决方案，评论主意，给方案投票，客户互相交流的同时，也同公司互动，公司可以发现客户的好主意和好建议，将其纳入自己产品和服务中，公司成长了，客户也满意了，双赢。
 
 h2. 版本
 
@@ -23,6 +23,10 @@ h2. 错误跟踪
 发现Bug? 请在GitHub创建issue!
 
 "https://github.com/danjiang/ideasbulb/issues":https://github.com/danjiang/ideasbulb/issues
+
+h2. 发布主意
+
+如果你对IdeasBulb现有功能有更好的想法，或者其他新功能的想法，可以将你的想法发布在<a href="http://danthought.ideasbulb.com">Dan Thought Studio</a>的交流平台，这个平台同样也是使用的IdeasBulb搭建，你可以更进一步了解IdeasBulb的功能
 
 h2. 作者
 
