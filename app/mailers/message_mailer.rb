@@ -1,11 +1,6 @@
 class MessageMailer < ActionMailer::Base
   default from: APP_CONFIG['devise_mailer_sender']
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.message_mailer.make_solution_email.subject
-  #
   def make_solution_email(user,creator,solution,idea)
     @user = user
     @creator = creator

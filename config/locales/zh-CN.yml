@@ -110,3 +110,9 @@ zh-CN:
         unlike: "取消不赞成"
     preference:
       site_name: "站点名称"
+  #for email
+  message_mailer:
+    make_solution_email:
+      subject: "主意有了新的建议"
+    make_comment_email:
+      subject: "主意有了新的评论"
