@@ -7,10 +7,10 @@ class Tag < ActiveRecord::Base
     end
   end
 
-  def self.update_count(tags_id)
+  def self.update_count(tag_ids)
     connection.update("UPDATE `tags` SET `ideas_count`=
     (SELECT count(*) FROM `ideas_tags` WHERE `tag_id` = `id`) 
-    WHERE `id` in (#{tags_id.join(',')})")
+    WHERE `id` in (#{tag_ids.join(',')})") if tag_ids && !tag_ids.empty?
   end
 
 end

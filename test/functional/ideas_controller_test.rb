@@ -51,6 +51,16 @@ class IdeasControllerTest < ActionController::TestCase
 
   test "login user create valid idea" do
     sign_in @tom
+    @under_review.tag_names = ""
+    assert_difference('Idea.count') do
+      xhr :post,:create,{idea: @under_review.attributes}
+    end
+    assert_response :success
+  end
+
+  test "login user create valid idea with tag" do
+    sign_in @tom
+    @under_review.tag_names = "test good"
     assert_difference('Idea.count') do
       xhr :post,:create,{idea: @under_review.attributes}
     end

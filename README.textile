@@ -26,7 +26,15 @@ h2. 错误跟踪
 
 h2. 发布主意
 
-如果你对IdeasBulb现有功能有更好的想法，或者其他新功能的想法，可以将你的想法发布在<a href="http://danthought.ideasbulb.com">Dan Thought Studio</a>的交流平台，这个平台同样也是使用的IdeasBulb搭建，你可以更进一步了解IdeasBulb的功能
+如果你对IdeasBulb现有功能有更好的想法，或者其他新功能的想法，可以将你的想法发布在 "Dan Thought Studio":http://danthought.ideasbulb.com 的交流平台，这个平台同样也是使用的IdeasBulb搭建，你可以更进一步了解IdeasBulb的功能
+
+h2. 开发者指南
+
+如果你想贡献你的一份力量，请阅读 "开发者贡献指南":http://www.ideasbulb.com/developer.html
+
+h2. 安装指南
+
+详细产品安装指南，请阅读 "安装指南":http://www.ideasbulb.com/install.html
 
 h2. 作者
 

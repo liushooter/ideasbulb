@@ -21,7 +21,12 @@ class Idea < ActiveRecord::Base
   end
   
   after_save do |idea|
-    Tag.update_count(self.tmp_tag_ids) if !is_handle && self.tmp_tag_ids
+    if self.tmp_tag_ids
+    logger.debug("have ")
+    else
+    logger.debug("not have ")
+    end
+    Tag.update_count(self.tmp_tag_ids) if !is_handle
   end
 
   before_update do |idea|
