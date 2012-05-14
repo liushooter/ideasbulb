@@ -26,6 +26,7 @@ gem 'therubyracer'
 gem 'devise'
 gem 'rails-i18n'
 gem 'paperclip','~> 3.0'
+gem 'resque'
 
 # Use unicorn as the web server
 # gem 'unicorn'

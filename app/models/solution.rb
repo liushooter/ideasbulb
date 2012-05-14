@@ -21,7 +21,7 @@ class Solution < ActiveRecord::Base
 
   after_create do |solution|
     User.update_points(solution.user_id,USER_NEW_SOLUTION_POINTS)
-    Message.make_solution_message(solution)
+    Resque.enqueue(SolutionMessage, solution.id)
   end
 
   def self.update_points(solution_id)
