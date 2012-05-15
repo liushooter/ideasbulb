@@ -9,7 +9,7 @@
  solution.find('.edit-solution-link').click -> showEditForm('solution',this)
  solution.find('ul.solution-actions').tooltip selector: "a.tip-link"
  form[0].reset()
- solution.insertAfter("#after-solutions-<%= @idea_id %>")
+ solution.insertBefore("#after-solutions-<%= @idea_id %>")
  $(solution[0]).css("backgroundColor","#57A957").animate({backgroundColor:"#fff"},1500)
  $('#action-button-<%= @idea_id %>').show()
 <% end %>
