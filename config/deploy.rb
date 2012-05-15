@@ -1,6 +1,8 @@
 require "rvm/capistrano"  # Load RVM's capistrano plugin.
 require "bundler/capistrano" # Bundler will be activated after each new deployment
 
+default_run_options[:pty] = true # For sudo
+
 set :use_sudo, false
 
 set :application, "danthought.ideasbulb.com" # Set Application Name
@@ -19,17 +21,17 @@ set :rvm_ruby_string, 'ruby-1.9.2-p290@ideasbulb' # Set RVM Env You Want App To 
 namespace :foreman do
   desc "Start the application services"
   task :start, :roles => :app do
-    sudo "start #{application}"
+    sudo "#{sudo} start #{application}"
   end
 
   desc "Stop the application services"
   task :stop, :roles => :app do
-    sudo "stop #{application}"
+    sudo "#{sudo} stop #{application}"
   end
 
   desc "Restart the application services"
   task :restart, :roles => :app do
-    run "sudo start #{application} || sudo restart #{application}"
+    run "#{sudo} start #{application} || #{sudo} restart #{application}"
   end
 
   desc "Display logs for a certain process - arg example: PROCESS=web-1"
@@ -39,7 +41,8 @@ namespace :foreman do
 
   desc "Export the Procfile to upstart scripts"
   task :export, :roles => :app do
-    run "cd #{release_path} && rvmsudo bundle exec foreman export upstart /etc/init -a #{application} #{shared_path}/log  -f #{release_path}/Procfile.production -c worker=2"
+    sudo "whoami"
+    run "cd #{current_path} && rvmsudo bundle exec foreman export upstart /etc/init -a #{application} -l #{shared_path}/log -u root -f #{current_path}/Procfile.production -c worker=2"
   end 
 end
 

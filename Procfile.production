@@ -1,1 +1,1 @@
-worker: bundle exec rake resque:work QUEUE=message -e production
+worker: bundle exec rake resque:work QUEUE=message RAILS_ENV=production
