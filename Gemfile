@@ -27,6 +27,7 @@ gem 'devise'
 gem 'rails-i18n'
 gem 'paperclip','~> 3.0'
 gem 'resque'
+gem 'foreman'
 
 # Use unicorn as the web server
 # gem 'unicorn'
