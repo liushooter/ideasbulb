@@ -70,6 +70,9 @@ img.profile_picture_small {
 .pick{
   background-color:#6dcff6
 }
+.bold{
+  font-weight:bold;
+}
 span.bold{
   font-weight:bold;
 }
@@ -138,4 +141,9 @@ p.more-ideas{
  padding-top:5px;
  border-top:1px dashed #EEE;
  text-align:right;
+}
+a.message{
+ display:block;
+ text-decoration: none;
+ padding:5px;
 }

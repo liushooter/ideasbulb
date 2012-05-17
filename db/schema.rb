@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507072510) do
+ActiveRecord::Schema.define(:version => 20120517045258) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(:version => 20120507072510) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "link"
+    t.boolean  "readed",     :default => false
   end
 
   create_table "preferences", :force => true do |t|

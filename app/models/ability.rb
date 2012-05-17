@@ -10,6 +10,7 @@ class Ability
       can :manage, Solution
       can [:edit,:update,:inbox], User
       can :manage, Vote
+      can :manage, Message
 
       if user.admin?
         can :manage, :all

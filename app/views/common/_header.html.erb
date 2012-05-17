@@ -16,7 +16,7 @@
       </ul>
       <ul class="nav pull-right">
         <% if user_signed_in? %>
-          <li id="inbox"><%= link_to inbox_users_path,:rel=>"tooltip","data-original-title"=>"消息","data-placement"=>"bottom" do %><i class="icon-inbox icon-white"></i><% end %></li>
+          <li id="inbox"><a href="javascript:;" rel="popover" data-original-title="<a href='/users/inbox'>查看全部</a>" data-content="<table class='table' style='width:100%'><% current_user.messages.where(:readed => false).order('created_at DESC').each do |message|%><tr><td><a href='/messages/<%= message.id %>' class='message'><%= message.content %><span class='shallow' style='float:right'><%= distance_of_time_in_words_to_now message.created_at %></span></a></td></tr><% end %></table>" data-placement="bottom" data-trigger="manual"><span class="label label-important" style="display:inline-block;width:18px;height:18px;text-align:center;font-size:14px;line-height:18px"><%= current_user.messages.where(:readed => false).count %></span></a></li>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.username %><b class="caret"></b></a>

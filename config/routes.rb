@@ -22,4 +22,5 @@ Ideasbulb::Application.routes.draw do
     put 'update_basic',:on => :collection
   end
   resources :votes
+  resources :messages
 end

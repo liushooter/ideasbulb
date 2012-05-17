@@ -131,7 +131,7 @@ initIdea = (html) ->
  $('ul.user-info').tooltip selector: "a[rel=tooltip]"
 
 jQuery ($) ->
- $('#inbox').tooltip selector: "a[rel=tooltip]"
+ $("a[rel=popover]").popover({template:'<div class="popover"><div class="arrow"></div><div class="popover-inner" style="width:400px"><h3 class="popover-title" style="font-size:13px;text-align:right"></h3><div class="popover-content" style="font-size:13px;"><p></p></div></div></div>'}).click -> $(this).popover('toggle')
  initIdeas() if $('#ideas-main').length > 0
  initIdea() if $('#idea-main').length > 0
  $('#modal-add-idea').on('show', -> $('#add-idea-title-input').val($('#nav-idea-title-input').val()))
