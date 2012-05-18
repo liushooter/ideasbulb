@@ -2,6 +2,7 @@
   <div class="page-header">
     <h1>消息</h1>
   </div>
+  <% unless @messages.blank? %>
   <div class="row">
     <div class="span10">
       <table class="table table-bordered table-condensed">
@@ -11,4 +12,5 @@
       </table>
     </div>
   </div>
+  <% end %>
 </div>
