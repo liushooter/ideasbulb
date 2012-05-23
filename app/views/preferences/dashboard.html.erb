@@ -1,2 +1,50 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<div class="page-header">
+  <h1>控制面板首页</h1>
+</div>
+<div class="row">
+  <div class="span10">
+    <h3>新发布的主意，一周统计</h3>
+    <table class="table table-bordered table-condensed">
+      <tr>
+        <% @new_ideas_week.each_key do |day| %>
+          <th><%= day %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <% @new_ideas_week.each_value do |count| %>
+         <td><%= count %></td>
+        <% end %>
+      </tr>
+    </table>
+    <h3>新注册的用户，一周统计</h3>
+    <table class="table table-bordered table-condensed">
+      <tr>
+        <% @new_users_week.each_key do |day| %>
+          <th><%= day %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <% @new_users_week.each_value do |count| %>
+         <td><%= count %></td>
+        <% end %>
+      </tr>
+    </table>
+    <h3>主意数量统计</h3>
+    <table class="table table-bordered table-condensed">
+      <tr>
+        <th><%= t('app.idea.status.under_review')%></th>
+        <th><%= t('app.idea.status.reviewed_success')%></th>
+        <th><%= t('app.idea.status.reviewed_fail')%></th>
+        <th><%= t('app.idea.status.in_the_works')%></th>
+        <th><%= t('app.idea.status.launched')%></th>
+      </tr>
+      <tr>
+         <td><%= Idea.where("status = ?",IDEA_STATUS_UNDER_REVIEW).count %></td>
+         <td><%= Idea.where("status = ?",IDEA_STATUS_REVIEWED_FAIL).count %></td>
+         <td><%= Idea.where("status = ?",IDEA_STATUS_REVIEWED_SUCCESS).count %></td>
+         <td><%= Idea.where("status = ?",IDEA_STATUS_IN_THE_WORKS).count %></td>
+         <td><%= Idea.where("status = ?",IDEA_STATUS_LAUNCHED).count %></td>
+      </tr>
+    </table>
+  </div>
+</div>
