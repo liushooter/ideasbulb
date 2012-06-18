@@ -43,7 +43,7 @@
             <a class="close" data-idea="<%= idea.id %>" style="cursor:hand">&times;</a>
             <%= f.label :content %>
 	        <%= f.text_area :content,:class => "span6",:style => "height:80px;overflow-y:auto" %>
-            <p class="help-block">不支持HTML，请输入普通文本</p>
+            <p class="help-block"><%= t('app.info.content_tip')%></p>
             <%= f.submit "发布",:class=>"btn btn-primary",:style=>"margin-top:5px" %>
 	      <% end %>
         </div>
@@ -54,7 +54,7 @@
             <%= f.text_field :title %>
             <%= f.label :content %>
 	        <%= f.text_area :content,:class => "span6",:style => "height:80px;overflow-y:auto" %>
-            <p class="help-block">不支持HTML，请输入普通文本</p>
+            <p class="help-block"><%= t('app.info.content_tip')%></p>
             <%= f.submit "发布",:class=>"btn btn-primary",:style=>"margin-top:5px" %>
 	      <% end %>
         </div>

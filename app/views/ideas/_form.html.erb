@@ -10,7 +10,7 @@
         </span>
       <% end %>
     </div>
-    <div class="idea-entry"><%= idea.description %></div>
+    <div class="idea-entry"><%= auto_link(idea.description) %></div>
     <div class="idea-info shallow"><%= distance_of_time_in_words_to_now idea.created_at %></div>
   </div>
   <div class="span1">
@@ -28,6 +28,7 @@
       <%= f.text_field :title, :class => "span5" %>
 	  <%= f.label :description %>
 	  <%= f.text_area :description,:class=>"span5",:style => "height:100px;overflow-y:auto" %>
+      <p class="help-block"><%= t('app.info.content_tip')%></p>
 	  <%= f.label :tag_names %>
       <%= f.text_field :tag_names, :class => "span3" %>
       <span class="help-inline">空格间隔，最多3个</span>

@@ -49,6 +49,7 @@
         <%= f.text_field :title, :class => "span5", :id => "add-idea-title-input" %>
 	    <%= f.label :description %>
 	    <%= f.text_area :description,:class=>"span5",:style => "height:100px;overflow-y:auto" %>
+        <p class="help-block"><%= t('app.info.content_tip')%></p>
 	    <%= f.label :tag_names %>
         <%= f.text_field :tag_names, :class => "span3" %>
         <span class="help-inline">空格间隔，最多3个</span>

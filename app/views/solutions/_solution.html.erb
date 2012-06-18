@@ -5,7 +5,7 @@
     <div class="solution">
 	  <div class="solution-info"><%= link_to solution.user.username,user_path(solution.user) %>，<span class="bold"><%= solution.title %></span></div>
 	  <div class="solution-info"><span class="label label-warning" id="solution-points-<%= solution.id %>"><%= solution.points %>分</span></div>
-	  <div class="solution-entry <%= solution.user.admin ? 'highlight':''%>"><%= solution.content %></div>
+	  <div class="solution-entry <%= solution.user.admin ? 'highlight':''%>"><%= auto_link(solution.content) %></div>
 	  <div class="solution-date shallow"><%= distance_of_time_in_words_to_now solution.created_at %></div>
 	</div>
   </div>
@@ -32,7 +32,7 @@
       <%= f.text_field :title %>
       <%= f.label :content %>
 	  <%= f.text_area :content,:class => "span6",:style => "height:80px;overflow-y:auto" %>
-      <p class="help-block">不支持HTML，请输入普通文本</p>
+      <p class="help-block"><%= t('app.info.content_tip')%></p>
       <%= f.submit "修改",:class=>"btn btn-primary",:style=>"margin-top:5px" %>
 	<% end %>
   </div>

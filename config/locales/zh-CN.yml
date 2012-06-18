@@ -43,6 +43,8 @@ zh-CN:
         name: "主题名称"
   #for application
   app:
+    info:
+      content_tip: "不支持HTML，链接以 http(s):// 开头的能够被识别"
     error:
       head: "请改正如下错误"
       topic:
