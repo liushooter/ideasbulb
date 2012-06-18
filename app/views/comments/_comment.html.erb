@@ -4,7 +4,7 @@
 	<div class="comment-profile"><%= link_to image_tag(comment.user.avatar.url(:thumb),:class=>"profile_picture_small"),user_path(comment.user) %></div>
 	<div class="comment">
 	  <div class="comment-info"><%= link_to comment.user.username,user_path(comment.user) %></div>
-	  <div class="comment-entry"><%= comment.content %></div>
+	  <div class="comment-entry <%= comment.user.admin ? 'highlight':''%>"><%= comment.content %></div>
 	  <div class="comment-date shallow"><%= distance_of_time_in_words_to_now comment.created_at %></div>
 	</div>
   </div>

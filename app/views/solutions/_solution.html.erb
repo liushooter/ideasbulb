@@ -5,7 +5,7 @@
     <div class="solution">
 	  <div class="solution-info"><%= link_to solution.user.username,user_path(solution.user) %>，<span class="bold"><%= solution.title %></span></div>
 	  <div class="solution-info"><span class="label label-warning" id="solution-points-<%= solution.id %>"><%= solution.points %>分</span></div>
-	  <div class="solution-entry"><%= solution.content %></div>
+	  <div class="solution-entry <%= solution.user.admin ? 'highlight':''%>"><%= solution.content %></div>
 	  <div class="solution-date shallow"><%= distance_of_time_in_words_to_now solution.created_at %></div>
 	</div>
   </div>
