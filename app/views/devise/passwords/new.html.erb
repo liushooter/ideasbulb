@@ -6,7 +6,7 @@
       <%= f.label :email %>
       <%= f.email_field :email,:class=>"span4"%>
       <label></label>
-      <%= f.submit "重设密码",:class=>"btn btn-large btn-primary" %>
+      <%= f.submit "重设密码",:class=>"btn btn-large btn-primary",:disable_with => "重设中..." %>
     <% end -%>
     <%= render "links" %>
   </div>

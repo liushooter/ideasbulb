@@ -9,7 +9,7 @@
       <%= f.label :password_confirmation,"确认新密码" %>
       <%= f.password_field :password_confirmation,:class=>"span4"%>
       <label></label>
-      <%= f.submit "修改密码",:class=>"btn btn-large btn-primary" %>
+      <%= f.submit "修改密码",:class=>"btn btn-large btn-primary",:disable_with => "修改中..." %>
     <% end -%>
     <%= render "links" %>
   </div>

@@ -34,7 +34,7 @@
       <span class="help-inline">空格间隔，最多3个</span>
 	  <%= f.label :topic %>
       <%= f.select :topic_id, Topic.all.collect{|t|[t.name,t.id]} %><br/>
-      <%= f.submit "修改",:class => "btn btn-primary" %>
+      <%= f.submit "修改",:class => "btn btn-primary",:disable_with => "修改中..." %>
     <% end %>
   </div>
 </div>

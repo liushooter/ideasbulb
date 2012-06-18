@@ -44,7 +44,7 @@
             <%= f.label :content %>
 	        <%= f.text_area :content,:class => "span6",:style => "height:80px;overflow-y:auto" %>
             <p class="help-block"><%= t('app.info.content_tip')%></p>
-            <%= f.submit "发布",:class=>"btn btn-primary",:style=>"margin-top:5px" %>
+            <%= f.submit "发布",:class=>"btn btn-primary",:style=>"margin-top:5px",:disable_with => "发布中..." %>
 	      <% end %>
         </div>
         <div class="span7" id="add-solution-<%=idea.id%>" style="display:none">
@@ -55,7 +55,7 @@
             <%= f.label :content %>
 	        <%= f.text_area :content,:class => "span6",:style => "height:80px;overflow-y:auto" %>
             <p class="help-block"><%= t('app.info.content_tip')%></p>
-            <%= f.submit "发布",:class=>"btn btn-primary",:style=>"margin-top:5px" %>
+            <%= f.submit "发布",:class=>"btn btn-primary",:style=>"margin-top:5px",:disable_with => "发布中..." %>
 	      <% end %>
         </div>
       </div>
