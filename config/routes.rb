@@ -16,6 +16,8 @@ Ideasbulb::Application.routes.draw do
   resources :users do
     put 'authority',:on => :member
     get 'inbox',:on => :collection
+    get 'more_ideas',:on => :member
+    get 'more_favored',:on => :member
   end
   resources :preferences do
     get 'dashboard',:on => :collection

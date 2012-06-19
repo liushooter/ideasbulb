@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
     can [:read,:search,:tab,:tag],Idea
-    can :show, User
+    can [:show,:more_ideas,:more_favored], User
     if user
       can [:promotion,:create,:update,:favoriate,:unfavoriate], Idea
       can :manage, Comment

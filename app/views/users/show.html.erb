@@ -8,19 +8,25 @@
     <li class="shallow"><%= @user.description %></li>
   </ul>
   <% if @user.ideas.count > 0 %>
-  <div class="page-header"><h3>发布的主意</h3></div>
-  <ul>
-    <% @user.ideas.each do |idea| %>
-      <li><%= link_to idea.title,idea %></li>
+    <div class="page-header"><h3>发布的主意</h3></div>
+    <ul id="list-ideas">
+      <% @user.ideas.order("created_at desc").limit(10).each do |idea| %>
+        <li><%= link_to idea.title,idea %></li>
+      <% end %>
+    </ul>
+    <% if @user.ideas.count > 10 %>
+      <div style="text-align:right"><%= button_to "查看更多",more_ideas_user_path(@user),:remote => true,:method=>:get,:disable_with => "加载中...",:class=>"btn",:form =>{:id =>"user-more-ideas"}%></div>
     <% end %>
-  </ul>
   <% end %>
   <% if @user.favored_ideas.count > 0 %>
-  <div class="page-header"><h3>关注的主意</h3></div>
-  <ul>
-    <% @user.favored_ideas.each do |idea| %>
-      <li><%= link_to idea.title,idea %></li>
+    <div class="page-header"><h3>关注的主意</h3></div>
+    <ul id="list-favor-ideas">
+      <% @user.favored_ideas.order("created_at desc").limit(10).each do |idea| %>
+        <li><%= link_to idea.title,idea %></li>
+      <% end %>
+    </ul>
+    <% if @user.favored_ideas.count > 10 %>
+      <div style="text-align:right"><%= button_to "查看更多",more_favored_user_path(@user),:remote => true,:method=>:get,:disable_with => "加载中...",:class=>"btn",:form =>{:id =>"user-more-favor-ideas"}%></div>
     <% end %>
-  </ul>
   <% end %>
 </div>
