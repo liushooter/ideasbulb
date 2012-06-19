@@ -24,7 +24,7 @@ module SolutionsHelper
   def vote_solution_link(path,method,solution_id,vote,like)
     content_tag :li,:id => "#{like ? 'like' : 'unlike'}-solution-#{solution_id}" do
       link_to path,:method=> method,:remote => true,"data-original-title"=>I18n.t("app.solution.#{vote ? 'vote' : 'unvote' }.#{like ? 'like' : 'unlike' }"),"data-placement"=>"right",:class => "tip-link" do
-        content_tag :span,content_tag(:i,"",:class => (like ? "icon-chevron-up" : "icon-chevron-down")+" icon-white" ),:class => "label#{vote ? '' : ' label-info'}"
+        content_tag :span,content_tag(:i,"",:class => (like ? "icon-thumbs-up" : "icon-thumbs-down")+" icon-white" ),:class => "label#{vote ? '' : ' label-info'}"
       end
     end  
   end
