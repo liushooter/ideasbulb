@@ -85,7 +85,7 @@ class IdeasController < ApplicationController
     if IDEAS_SORT_HOT == params[:sort]
       sort = hot_sort 
     elsif IDEAS_SORT_NEWEST == params[:sort]
-      sort = "created_at DESC"
+      sort = "ideas.created_at DESC"
     else
       sort = hot_sort 
     end
@@ -120,6 +120,6 @@ class IdeasController < ApplicationController
   end
 
   def hot_sort
-    "(2*`solutions_count`+`comments_count`+`solutions_points`)/POW(TIMESTAMPDIFF(HOUR,`created_at`,NOW())+2,1.5) DESC" 
+    "(2*`solutions_count`+`comments_count`+`solutions_points`)/POW(TIMESTAMPDIFF(HOUR,`ideas`.`created_at`,NOW())+2,1.5) DESC" 
   end
 end
