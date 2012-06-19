@@ -47,7 +47,8 @@ class UsersController < ApplicationController
   end
 
   def inbox
-    @messages = current_user.messages.order("created_at DESC")
+    @messages = current_user.messages.paginate(:page => params[:page]).order("readed,created_at DESC")
+    render :layout => false if request.xhr?
   end
 
 end

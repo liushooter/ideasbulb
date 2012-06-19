@@ -112,6 +112,9 @@ zh-CN:
         unlike: "取消不赞成"
     preference:
       site_name: "站点名称"
+    message:
+      readed: "（已读）"
+      unread: "（未读）"
   #for email
   message_mailer:
     make_solution_email:

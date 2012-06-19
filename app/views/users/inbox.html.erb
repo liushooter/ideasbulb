@@ -10,6 +10,7 @@
           <tr><td><%= message_link_tag message %></td></tr>
         <% end %>
       </table>
+      <%= will_paginate @messages,:class => "pagination pagination-right",:id=>"messages-pagination" %>
     </div>
   </div>
   <% end %>
