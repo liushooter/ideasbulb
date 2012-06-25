@@ -23,13 +23,13 @@
               <i class="icon-search"></i>
             <% end %>
 		  <% end %>
-          <% if user_signed_in? %>
-		    <ul class="nav nav-pills nav-stacked" id="nav-owner-ideas">
-			  <%= tab_item_tag nil,@topic_id do %><%= link_to '所有的主意',tab_ideas_path(:all => true),:remote=>true %><% end %>
+		  <ul class="nav nav-pills nav-stacked" id="nav-owner-ideas">
+			<%= tab_item_tag nil,@topic_id do %><%= link_to '所有的主意',tab_ideas_path(:all => true),:remote=>true %><% end %>
+            <% if user_signed_in? %>
 			  <li><%= link_to '发布的主意',tab_ideas_path(:user_id => current_user.id),:remote=>true %></li>
 			  <li><%= link_to '关注的主意',tab_ideas_path(:favorer_id => current_user.id),:remote=>true %></li>
-		    </ul>
-          <% end %>
+            <% end %>
+		  </ul>
           <% if Topic.count > 0 %>
 		    <h4>主题</h4>
 		    <ul class="nav nav-pills nav-stacked" id="nav-topic-ideas">
