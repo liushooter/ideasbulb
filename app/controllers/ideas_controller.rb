@@ -51,28 +51,20 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     case @idea.status
     when IDEA_STATUS_UNDER_REVIEW
-      if params[:fail]
-        check_status(IDEA_STATUS_REVIEWED_FAIL)
-      else
-        check_status(IDEA_STATUS_REVIEWED_SUCCESS)
-      end
-    when IDEA_STATUS_REVIEWED_FAIL
-      check_status(IDEA_STATUS_UNDER_REVIEW)
+      check_status(IDEA_STATUS_REVIEWED_SUCCESS)
     when IDEA_STATUS_REVIEWED_SUCCESS
       if !params[:solutionIds]
         flash[:alert] = I18n.t('app.error.idea.pick_solution') 
       else
-        check_status(IDEA_STATUS_IN_THE_WORKS)
+        check_status(IDEA_STATUS_LAUNCHED)
       end
-    when IDEA_STATUS_IN_THE_WORKS
-      check_status(IDEA_STATUS_LAUNCHED)
     when IDEA_STATUS_LAUNCHED 
       flash[:alert] = I18n.t('app.error.idea.launched') 
     end
     if !flash[:alert]
       @idea.is_handle = true
-      Solution.find(params[:solutionIds]).each{|solution| solution.update_attribute(:pick,true)} if params[:solutionIds]
-      @idea.update_attributes(:status => params[:status],:fail => params[:fail])
+      @idea.solutions.find(params[:solutionIds]).each{|solution| solution.update_attribute(:pick,true)} if params[:solutionIds]
+      @idea.update_attributes(:status => params[:status])
     end
     redirect_to @idea 
   end

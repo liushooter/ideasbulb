@@ -111,7 +111,7 @@ pickSolution = (target) ->
  else
   checkbox.parent().parent().parent().parent().removeClass("pick").prev().removeClass("pick")
 
-changeInTheWorkButtonLink = (target) ->
+changeLaunchedButtonLink = (target) ->
  link = $(target)
  solutionIds = ''
  $('.solution-pick:checked').each ->
@@ -126,7 +126,7 @@ initIdea = (html) ->
  $('.edit-comment-link').click -> showEditForm('comment',this)
  $('.edit-solution-link').click -> showEditForm('solution',this)
  $('.solution-pick').change -> pickSolution(this)
- $('#in-the-work-buton').click -> changeInTheWorkButtonLink(this)
+ $('#launched-buton').click -> changeLaunchedButtonLink(this)
  $('ul.solution-actions').tooltip selector: "a.tip-link"
  $('ul.user-info').tooltip selector: "a[rel=tooltip]"
 

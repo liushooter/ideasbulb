@@ -1,6 +1,6 @@
 module SolutionsHelper
   def new_solution_button(idea)
-    if (can? :create,Solution) && idea.status != IDEA_STATUS_IN_THE_WORKS && idea.status != IDEA_STATUS_LAUNCHED
+    if (can? :create,Solution) && idea.status != IDEA_STATUS_LAUNCHED
       content_tag :div,:class=>"btn-group" do
         button_tag I18n.t("app.solution.new"),:class=>"solution-btn btn btn-primary","data-idea"=> idea.id
       end
@@ -9,14 +9,14 @@ module SolutionsHelper
 
   def edit_solution_link(solution)
     idea = solution.idea
-    if (can? :update,solution) && current_user.id == solution.user.id && idea.status != IDEA_STATUS_IN_THE_WORKS && idea.status != IDEA_STATUS_LAUNCHED
+    if (can? :update,solution) && current_user.id == solution.user.id && idea.status != IDEA_STATUS_LAUNCHED
       content_tag :li,link_to(I18n.t("app.solution.edit"),"javascript:;","data-solution"=> solution.id,:class=>"edit-solution-link"),:style=>"margin-top:10px"
     end
   end
 
   def del_solution_link(solution)
     idea = solution.idea
-    if (can? :destroy,solution) && current_user.id == solution.user.id && idea.status != IDEA_STATUS_IN_THE_WORKS && idea.status != IDEA_STATUS_LAUNCHED
+    if (can? :destroy,solution) && current_user.id == solution.user.id && idea.status != IDEA_STATUS_LAUNCHED
       content_tag :li,link_to(I18n.t("app.solution.del"),solution,:method => :delete,:remote => true,"data-solution"=> solution.id,:id=>"del-solution-#{solution.id}")
     end 
   end

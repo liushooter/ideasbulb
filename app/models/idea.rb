@@ -21,16 +21,11 @@ class Idea < ActiveRecord::Base
   end
   
   after_save do |idea|
-    if self.tmp_tag_ids
-    logger.debug("have ")
-    else
-    logger.debug("not have ")
-    end
     Tag.update_count(self.tmp_tag_ids) if !is_handle
   end
 
   before_update do |idea|
-    if !is_handle && (idea.status == IDEA_STATUS_IN_THE_WORKS || idea.status == IDEA_STATUS_LAUNCHED) 
+    if !is_handle && idea.status == IDEA_STATUS_LAUNCHED
       errors.add(:status,I18n.t('app.error.idea.edit'))
       return false
     end

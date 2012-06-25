@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
   def setup
-    @a_comment = comments(:a_comment)    
+    @comment = comments(:user_tom_comment_under_review)    
   end
 
   test "validate empty comment" do
@@ -14,14 +14,14 @@ class CommentTest < ActiveSupport::TestCase
   test "validate comment content maxlength" do
     content = ""
     10.times do
-      content = @a_comment.content + content
+      content = @comment.content + content
     end
-    @a_comment.content = content
-    assert @a_comment.valid?
-    assert @a_comment.errors[:content].empty?
-    @a_comment.content = @a_comment.content + "a"
-    assert @a_comment.invalid?
-    assert @a_comment.errors[:content].any?
+    @comment.content = content
+    assert @comment.valid?
+    assert @comment.errors[:content].empty?
+    @comment.content = @comment.content + "a"
+    assert @comment.invalid?
+    assert @comment.errors[:content].any?
   end
 
 end

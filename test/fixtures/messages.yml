@@ -1,4 +1,4 @@
-one:
-  user: "tom" 
+user_tom_message:
+  user: "user_tom" 
   content: hello world
   link: /ideas/tab

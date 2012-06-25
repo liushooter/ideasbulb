@@ -78,21 +78,12 @@ zh-CN:
         radio_no: "否"
     idea:
       status:
-        under_review: "审核中"
-        reviewed_success: "审核通过"
-        reviewed_fail: "审核不通过"
-        in_the_works: "实施中"
+        under_review: "新发布"
+        reviewed_success: "投票中"
         launched: "已实施"
-      fail:
-        repeated: "重复"
-        launched: "已经实施过"
-        invalid: "不合格"
-      success: "通过" 
       handle: 
-        under_review: "开始审核"
-        reviewed_fail: "重新审核"
-        reviewed_success: "开始实施"
-        in_the_works: "完成实施"
+        under_review: "审核通过"
+        reviewed_success: "完成实施"
       favoriate: "关注动向"
       unfavoriate: "取消关注"
       edit: "修改"

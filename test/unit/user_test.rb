@@ -26,7 +26,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "validate edit username" do
-    user = users(:jack)
+    user = users(:admin_jack)
     assert user.valid?
     user.username = "mick123"
     assert user.valid?
@@ -79,7 +79,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "validate dscription" do
-    user = users(:jack)
+    user = users(:admin_jack)
     description = ""
     4.times do
       description = user.description + description
@@ -92,7 +92,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "validate website" do
-    user = users(:jack)
+    user = users(:admin_jack)
     bad = %w{1234 ftp://dom http://tt.a http://dd.abcdef}
     bad.each do |website|
       user.website = website

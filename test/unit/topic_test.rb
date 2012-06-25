@@ -2,8 +2,8 @@ require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
   def setup
-    @topic_one = topics(:topic_one)    
-    @topic_two = topics(:topic_two)    
+    @topic_iPhone = topics(:topic_iPhone)    
+    @topic_website = topics(:topic_website)    
   end
 
   test "validate empty topic" do
@@ -26,9 +26,9 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test 'validate remove topic that don`t have ideas' do
-    assert !@topic_one.check_product_count
-    assert @topic_one.errors[:base].any?
-    @topic_two.check_product_count
-    assert @topic_two.errors[:base].empty?
+    assert !@topic_iPhone.check_product_count
+    assert @topic_iPhone.errors[:base].any?
+    @topic_website.check_product_count
+    assert @topic_website.errors[:base].empty?
   end
 end

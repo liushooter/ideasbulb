@@ -4,84 +4,84 @@ class CommentsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   def setup
-    @a_comment = comments(:a_comment)
-    @jack_comment = comments(:jack_comment)
-    @under_review = ideas(:under_review)    
-    @tom = users(:tom)
+    @user_tom_comment_under_review = comments(:user_tom_comment_under_review)
+    @user_zhang_comment_under_review = comments(:user_zhang_comment_under_review)
+    @user_tom_under_review = ideas(:user_tom_under_review)    
+    @user_tom = users(:user_tom)
   end
 
   test "everybody not create" do
-    xhr :post,:create,:idea_id => @under_review.id
+    xhr :post,:create,:idea_id => @user_tom_under_review.id
     assert_redirected_to root_path
     assert_equal I18n.t('unauthorized.manage.all'),flash[:alert]
   end
 
   test "login user create valid comment" do
-    sign_in @tom
+    sign_in @user_tom
     assert_difference('Comment.count') do
-      xhr :post,:create,{:idea_id => @under_review.id,comment: @a_comment.attributes}
+      xhr :post,:create,{:idea_id => @user_tom_under_review.id,comment: @user_tom_comment_under_review.attributes}
     end
     assert_response :success
   end
 
   test "login user create invalid comment" do
-    sign_in @tom
-    @a_comment.content = ""
+    sign_in @user_tom
+    @user_tom_comment_under_review.content = ""
     assert_no_difference('Topic.count') do
-      xhr :post,:create,{:idea_id => @under_review.id,comment: @a_comment.attributes}
+      xhr :post,:create,{:idea_id => @user_tom_under_review.id,comment: @user_tom_comment_under_review.attributes}
     end
     assert_response :success
   end
 
   test "everybody not destroy" do
-    xhr :delete,:destroy,{:id => @a_comment.id}
+    xhr :delete,:destroy,{:id => @user_tom_comment_under_review.id}
     assert_redirected_to root_path
     assert_equal I18n.t('unauthorized.manage.all'),flash[:alert]
   end
 
   test "login user destroy" do
-    sign_in @tom
+    sign_in @user_tom
     assert_difference('Comment.count',-1) do
-      xhr :delete,:destroy,{:id => @a_comment.id}
+      xhr :delete,:destroy,{:id => @user_tom_comment_under_review.id}
     end 
     assert_response :success
   end
  
   test "login user not destroy other comment" do
-    sign_in @tom
+    sign_in @user_tom
     assert_raise(ActiveRecord::RecordNotFound){
-      xhr :delete,:destroy,{:id => @jack_comment.id}
+      xhr :delete,:destroy,{:id => @user_zhang_comment_under_review.id}
     }
   end
  
   test "everybody not update" do
-    xhr :put,:update,{:id => @a_comment.id}
+    xhr :put,:update,{:id => @user_tom_comment_under_review.id}
     assert_redirected_to root_path
     assert_equal I18n.t('unauthorized.manage.all'),flash[:alert]
   end
 
   test "login user update valid comment" do
-    sign_in @tom
+    sign_in @user_tom
     assert_no_difference('Comment.count') do
-      xhr :put,:update,{:id => @a_comment.id,:comment => {:content => "update a name"}}
+      xhr :put,:update,{:id => @user_tom_comment_under_review.id,:comment => {:content => "update a name"}}
     end
     assert assigns(:comment).errors.empty?
     assert_response :success
   end
 
   test "login user update invalid comment" do
-    sign_in @tom
+    sign_in @user_tom
     assert_no_difference('Comment.count') do
-      xhr :put,:update,{:id => @a_comment.id,:comment => {:content => " "}}
+      xhr :put,:update,{:id => @user_tom_comment_under_review.id,:comment => {:content => " "}}
     end
     assert assigns(:comment).errors.any?
     assert_response :success
   end
 
   test "login user not update other comment" do
-    sign_in @tom
+    sign_in @user_tom
     assert_raise(ActiveRecord::RecordNotFound){
-      xhr :put,:update, id: @jack_comment.to_param, idea: @jack_comment.attributes
+      xhr :put,:update,{:id => @user_zhang_comment_under_review.id,:comment => {:content => "update a name"}}
     }
   end
 end

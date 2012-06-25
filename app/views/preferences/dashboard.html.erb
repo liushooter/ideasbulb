@@ -33,16 +33,12 @@
     <table class="table table-bordered table-condensed">
       <tr>
         <th><%= t('app.idea.status.under_review')%></th>
-        <th><%= t('app.idea.status.reviewed_fail')%></th>
         <th><%= t('app.idea.status.reviewed_success')%></th>
-        <th><%= t('app.idea.status.in_the_works')%></th>
         <th><%= t('app.idea.status.launched')%></th>
       </tr>
       <tr>
          <td><%= Idea.where("status = ?",IDEA_STATUS_UNDER_REVIEW).count %></td>
-         <td><%= Idea.where("status = ?",IDEA_STATUS_REVIEWED_FAIL).count %></td>
          <td><%= Idea.where("status = ?",IDEA_STATUS_REVIEWED_SUCCESS).count %></td>
-         <td><%= Idea.where("status = ?",IDEA_STATUS_IN_THE_WORKS).count %></td>
          <td><%= Idea.where("status = ?",IDEA_STATUS_LAUNCHED).count %></td>
       </tr>
     </table>

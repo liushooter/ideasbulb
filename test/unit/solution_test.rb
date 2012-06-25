@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SolutionTest < ActiveSupport::TestCase
   def setup
-    @solution_one = solutions(:solution_one)    
+    @solution = solutions(:user_tom_solution_reviewed_success)    
   end
 
   test "validate empty solution" do
@@ -15,35 +15,35 @@ class SolutionTest < ActiveSupport::TestCase
   test "validate solution content maxlength" do
     content = ""
     10.times do
-      content = @solution_one.content + content
+      content = @solution.content + content
     end
-    @solution_one.content = content
-    assert @solution_one.valid?
-    assert @solution_one.errors[:content].empty?
-    @solution_one.content = @solution_one.content + "a"
-    assert @solution_one.invalid?
-    assert @solution_one.errors[:content].any?
+    @solution.content = content
+    assert @solution.valid?
+    assert @solution.errors[:content].empty?
+    @solution.content = @solution.content + "a"
+    assert @solution.invalid?
+    assert @solution.errors[:content].any?
   end
 
   test "validate solution title maxlength" do
     title = ""
     6.times do
-      title = @solution_one.title + title
+      title = @solution.title + title
     end
-    @solution_one.title = title
-    assert @solution_one.valid?
-    assert @solution_one.errors[:title].empty?
-    @solution_one.title = @solution_one.title + "a"
-    assert @solution_one.invalid?
-    assert @solution_one.errors[:title].any?
+    @solution.title = title
+    assert @solution.valid?
+    assert @solution.errors[:title].empty?
+    @solution.title = @solution.title + "a"
+    assert @solution.invalid?
+    assert @solution.errors[:title].any?
   end
 
   test "validate update solution points" do
     points = 0
-    @solution_one.votes.each do |vote|
+    @solution.votes.each do |vote|
       points = points + (vote.like ? 1 : -1)
     end
-    Solution.update_points(@solution_one.id)
-    assert_equal points,Solution.find(@solution_one.id).points
+    Solution.update_points(@solution.id)
+    assert_equal points,Solution.find(@solution.id).points
   end
 end

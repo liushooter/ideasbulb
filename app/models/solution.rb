@@ -33,7 +33,7 @@ class Solution < ActiveRecord::Base
 
   private
   def check_status(status,error)
-    if status == IDEA_STATUS_IN_THE_WORKS || status == IDEA_STATUS_LAUNCHED 
+    if status == IDEA_STATUS_LAUNCHED 
       errors.add(:base,I18n.t(error))      
       return false
     end

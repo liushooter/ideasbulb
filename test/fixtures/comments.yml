@@ -1,9 +1,9 @@
-a_comment:
+user_tom_comment_under_review:
   content: 一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十
-  user: "tom"
-  idea: "under_review"
+  user: "user_tom"
+  idea: "user_tom_under_review"
 
-jack_comment:
+user_zhang_comment_under_review:
   content: 一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十
-  user: "jack"
-  idea: "under_review"
+  user: "user_zhang"
+  idea: "user_tom_under_review"

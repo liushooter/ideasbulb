@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517045258) do
+ActiveRecord::Schema.define(:version => 20120625021453) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(:version => 20120517045258) do
     t.integer  "comments_count",   :default => 0
     t.integer  "topic_id"
     t.integer  "solutions_count",  :default => 0
-    t.string   "fail"
     t.integer  "solutions_points", :default => 0
   end
 

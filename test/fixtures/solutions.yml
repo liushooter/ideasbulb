@@ -1,27 +1,34 @@
-solution_one:
+user_tom_solution_reviewed_success:
   title: 一二三四五六七八九十
   content: 一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十
   points: 1
-  idea: "reviewed_success" 
-  user: "tom"
+  idea: "user_tom_reviewed_success" 
+  user: "user_tom"
 
-solution_two:
+user_tom_solution_launched:
   title: MyString
   content: MyText
   points: 1
-  idea: "reviewed_success" 
-  user: "jack"
+  idea: "user_tom_launched" 
+  user: "user_tom"
 
-solution_in_the_work:
+user_tom_solution_under_review:
   title: MyString
   content: MyText
   points: 1
-  idea: "in_the_works" 
-  user: "tom"
+  idea: "user_tom_under_review" 
+  user: "user_tom"
 
-solution_launched:
+user_zhang_solution_under_review:
   title: MyString
   content: MyText
   points: 1
-  idea: "launched" 
-  user: "tom"
+  idea: "user_tom_under_review" 
+  user: "user_zhang"
+
+user_zhang_solution_reviewed_success:
+  title: MyString
+  content: MyText
+  points: 1
+  idea: "user_tom_reviewed_success" 
+  user: "user_zhang"
