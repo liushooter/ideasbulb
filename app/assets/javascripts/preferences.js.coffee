@@ -14,7 +14,13 @@ root.editTopic = (target) ->
   tr.remove()
  $('<tr></tr>').append($('<td colspan="3"></td>').append(editForm)).insertAfter(editBtn.parent().parent().hide())
 
+showIndicator = (target) ->
+ container = $(target)
+ container.empty()
+ container.append("<div class='indicator'></div>")
+
 active = (target) ->
+ showIndicator("#admin-main")
  li = $(target).parent().addClass("active")
  li.siblings().removeClass("active").find("i").removeClass("icon-white")
  li.find("i").addClass("icon-white")

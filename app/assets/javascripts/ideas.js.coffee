@@ -42,6 +42,11 @@ showMore = (target) ->
    current=current.next()
  row.remove()
 
+showIndicator = (target) ->
+ container = $(target)
+ container.empty()
+ container.append("<div class='indicator'></div>")
+
 active = (target) -> $(target).parent().addClass("active").siblings().removeClass("active")
 activeIcon = (target) ->
  li = $(target).parent().addClass("active")
@@ -58,6 +63,7 @@ fillIdea = (html) -> $("#idea-main").html(html)
 initStatusTab = ->
  $('#nav-status a')
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
+   showIndicator('#ideas-main')
    activeLinkParam = getActiveLinkParam('#nav-owner-ideas')
    settings.url = settings.url+"&"+(activeLinkParam or= getActiveLinkParam('#nav-topic-ideas'))+"&sort="+$('#ideas-sort-select').val()
    active(this))
@@ -66,12 +72,14 @@ initStatusTab = ->
 initRightNav = ->
  $('#nav-owner-ideas a')
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
+   showIndicator('#ideas-main')
    settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')+"&sort="+$('#ideas-sort-select').val()
    $('#nav-topic-ideas').children().removeClass("active").find("i").removeClass("icon-white")
    active(this))
   .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
  $('#nav-topic-ideas a')
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
+   showIndicator('#ideas-main')
    settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')+"&sort="+$('#ideas-sort-select').val()
    $('#nav-owner-ideas').children().removeClass("active")
    activeIcon(this))
@@ -82,6 +90,7 @@ initSortSelect = ->
  $('#ideas-sort-select').change -> sortForm.submit()
  sortForm
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
+   showIndicator('#ideas-main')
    settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')
    activeLinkParam = getActiveLinkParam('#nav-owner-ideas')
    settings.url = settings.url+"&"+(activeLinkParam or= getActiveLinkParam('#nav-topic-ideas')))
