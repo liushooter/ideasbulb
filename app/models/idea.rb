@@ -22,7 +22,11 @@ class Idea < ActiveRecord::Base
   end
   
   after_save do |idea|
-    Tag.update_count(self.tmp_tag_ids) if !is_handle
+    if is_handle
+      Resque.enqueue(HandleIdeaMessage, idea.id)
+    else
+      Tag.update_count(self.tmp_tag_ids)
+    end
   end
 
   before_update do |idea|

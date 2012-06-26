@@ -10,7 +10,7 @@ class CommentMessage
     users << idea.user if creator.id != idea.user_id
     idea.favorers.each {|user| users << user if creator.id != user.id && idea.user_id != user.id }
     users.each do |user| 
-      Message.create(:user => user,:content => "#{creator.username} 评论了 #{idea.title}",:link => "/ideas/#{idea.id}")
+      Message.create(:user => user,:content => "\"#{creator.username}\"评论了主意\"#{idea.title}\"",:link => "/ideas/#{idea.id}")
       MessageMailer.make_comment_email(user,creator,comment,idea).deliver
     end
   end

@@ -8,7 +8,7 @@ class NewIdeaMessage
     users = []
     User.where(:admin => true).each {|user| users << user if idea.user_id != user.id }
     users.each do |user| 
-      Message.create(:user => user,:content => "#{creator.username} 发布了新主意 #{idea.title}",:link => "/ideas/#{idea.id}")
+      Message.create(:user => user,:content => "\"#{creator.username}\"发布了新主意\"#{idea.title}\"",:link => "/ideas/#{idea.id}")
       MessageMailer.new_idea_email(user,creator,idea).deliver
     end
   end

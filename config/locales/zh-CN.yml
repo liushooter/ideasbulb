@@ -114,3 +114,5 @@ zh-CN:
       subject: "主意有了新的评论"
     new_idea_email:
       subject: "用户发布了新主意"
+    handle_idea_email:
+      subject: "主意状态被管理员修改"
