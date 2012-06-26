@@ -18,6 +18,7 @@ class Idea < ActiveRecord::Base
 
   after_create do |idea|
     User.update_points(idea.user_id,USER_NEW_IDEA_POINTS)
+    Resque.enqueue(NewIdeaMessage, idea.id)
   end
   
   after_save do |idea|

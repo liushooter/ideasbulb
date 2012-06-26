@@ -16,4 +16,12 @@ class MessageMailer < ActionMailer::Base
     @idea = idea
     mail to: user.email
   end
+
+  def new_idea_email(user,creator,idea)
+    @user = user
+    @creator = creator
+    @idea = idea
+    mail to: user.email
+  end
+
 end
