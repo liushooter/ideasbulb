@@ -9,7 +9,30 @@ root.showEditIdeaForm = (target) ->
   form.prev().remove()
   $("#idea-"+closeX.data('idea')).show()
 
-root.showEditForm = (type,target) ->
+root.insertSolution = (html,target,action,animate) ->
+ solution = $(html)
+ solution.find('.edit-solution-link').click -> showEditForm('solution',this)
+ solution.find('ul.solution-actions').tooltip selector: "a.tip-link"
+ if(action == "before" ) 
+  solution.insertBefore(target)
+ else if(action == "after" )
+  solution.insertAfter(target)
+ else if(action == "replace" )
+  $(target).replaceWith(solution)
+ $(solution[0]).css("backgroundColor","#57A957").animate({backgroundColor:"#fff"},1500) if animate
+
+root.insertComment = (html,target,action,animate) ->
+ comment = $(html)
+ comment.find('.edit-comment-link').click -> showEditForm('comment',this)
+ if(action == "before" ) 
+  comment.insertBefore(target)
+ else if(action == "after" )
+  comment.insertAfter(target)
+ else if(action == "replace" )
+  $(target).replaceWith(comment)
+ $(comment[0]).css("backgroundColor","#57A957").animate({backgroundColor:"#fff"},1500) if animate
+
+showEditForm = (type,target) ->
  editLink = $(target)
  $("#"+type+"-"+editLink.data(type)).hide()
  $("#edit-"+type+"-"+editLink.data(type)).show().find('a.close').click ->
@@ -21,31 +44,22 @@ root.showEditForm = (type,target) ->
 
 showForm = (type,target) ->
  addBtn = $(target)
- addBtn.parent().parent().hide()
- $(type+addBtn.data('idea')).show().find('a.close').click ->
+ $("#action-button-"+addBtn.data('idea')).hide()
+ formDiv = $(type+addBtn.data('idea')).show()
+ formDiv.find('a.close').click ->
   closeX = $(this)
   form = closeX.parent()
   form.parent().hide()
   form[0].reset()
   form.prev().remove()
   $("#action-button-"+closeX.data('idea')).show()
+ $.scrollTo(formDiv,500,{offset:-100}) if(type == "#add-comment-")
 
 showMore = (target) ->
- link = $(target)
- more = link.data("more")
- row=link.parent().parent()
- row.prev().remove()
- current = row.next()
- for i in [1..more]
-  do ->
-   current.show('blind','','fast')
-   current=current.next()
- row.remove()
+ $(target).parent().parent().empty().append("<div class='indicator'></div>")
 
 showIndicator = (target) ->
- container = $(target)
- container.empty()
- container.append("<div class='indicator'></div>")
+ $(target).empty().append("<div class='indicator'></div>")
 
 active = (target) -> $(target).parent().addClass("active").siblings().removeClass("active")
 activeIcon = (target) ->
@@ -113,20 +127,6 @@ initIdeas = (html) ->
  $('ul.solution-actions').tooltip selector: "a.tip-link"
  $('ul.user-info').tooltip selector: "a[rel=tooltip]"
 
-pickSolution = (target) ->
- checkbox = $(target)
- if checkbox.attr("checked")
-  checkbox.parent().parent().parent().parent().addClass("pick").prev().addClass("pick")
- else
-  checkbox.parent().parent().parent().parent().removeClass("pick").prev().removeClass("pick")
-
-changeLaunchedButtonLink = (target) ->
- link = $(target)
- solutionIds = ''
- $('.solution-pick:checked').each ->
-  solutionIds += "&solutionIds[]="+this.value
- link.attr('href',link.attr('href')+solutionIds)
-
 initIdea = (html) ->
  fillIdea(html) if html
  $('.comment-btn').click -> showForm("#add-comment-",this)
@@ -134,8 +134,6 @@ initIdea = (html) ->
  $('.edit-idea-link').click -> showEditIdeaForm(this)
  $('.edit-comment-link').click -> showEditForm('comment',this)
  $('.edit-solution-link').click -> showEditForm('solution',this)
- $('.solution-pick').change -> pickSolution(this)
- $('#launched-buton').click -> changeLaunchedButtonLink(this)
  $('ul.solution-actions').tooltip selector: "a.tip-link"
  $('ul.user-info').tooltip selector: "a[rel=tooltip]"
 

@@ -101,6 +101,8 @@ zh-CN:
       unvote:
         like: "取消赞成"
         unlike: "取消不赞成"
+      pick: "选中"
+      unpick: "不选"
     preference:
       site_name: "站点名称"
     message:

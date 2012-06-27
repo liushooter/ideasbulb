@@ -1,14 +1,11 @@
- addDiv = $("#add-comment-<%= @idea_id %>") 
+ addDiv = $("#add-comment-<%= @idea_id %>")
  form = addDiv.find("form")
  form.prev().remove()
-<% if @comment.errors.any? %> 
+<% if @comment.errors.any? %>
  form.before('<%= errors_msg_tag @comment %>')
 <% else %>
  addDiv.hide()
- comment = $('<%= escape_javascript( render(:partial => @comment )) %>')
- comment.find('.edit-comment-link').click -> showEditForm('comment',this)
  form[0].reset()
- comment.insertBefore("#after-comments-<%= @idea_id %>")
- $(comment[0]).css("backgroundColor","#57A957").animate({backgroundColor:"#fff"},1500)
+ insertComment('<%= escape_javascript( render(:partial => @comment )) %>',"#before-comments-<%= @idea_id %>","after",true)
  $('#action-button-<%= @idea_id %>').show()
 <% end %>

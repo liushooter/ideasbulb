@@ -2,12 +2,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can [:read,:search,:tab,:tag],Idea
+    can [:read,:search,:tab,:tag,:more_solutions,:more_comments],Idea
     can [:show,:more_ideas,:more_favored], User
     if user
       can [:promotion,:create,:update,:favoriate,:unfavoriate], Idea
       can :manage, Comment
-      can :manage, Solution
+      can [:create,:update,:destroy], Solution
       can [:edit,:update,:inbox], User
       can :manage, Vote
       can :manage, Message

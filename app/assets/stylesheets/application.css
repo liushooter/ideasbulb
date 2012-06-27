@@ -132,6 +132,7 @@ div.show-more{
   padding:5px 0;
   background:  #DDD;
   text-align:center;
+  margin-bottom:10px;
 }
 form.login-dropdown{
  margin:10px;

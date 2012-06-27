@@ -6,20 +6,19 @@
 	  <div class="solution-info"><%= link_to solution.user.username,user_path(solution.user) %>，<span class="bold"><%= solution.title %></span></div>
 	  <div class="solution-info"><span class="label label-warning" id="solution-points-<%= solution.id %>"><%= solution.points %>分</span></div>
 	  <div class="solution-entry <%= solution.user.admin ? 'highlight':''%>"><%= auto_link(solution.content) %></div>
-	  <div class="solution-date shallow"><%= distance_of_time_in_words_to_now solution.created_at %></div>
+	  <div class="solution-date shallow"><%= distance_of_time_in_words_to_now solution.created_at %>前</div>
 	</div>
   </div>
   <div class="span1">
     <ul class="unstyled actions solution-actions">
-      <% if @idea_page && (can? :handle,solution.idea) && solution.idea.status == IDEA_STATUS_REVIEWED_SUCCESS %>
-	    <li><input class="solution-pick" type="checkbox" value="<%= solution.id %>"> 实施</input></li>
-      <% end %>
-      <% if solution.pick %>
-	    <li><a href="javascript:;" class="tip-link" data-original-title="被选中的方案" data-placement="right" ><%= image_tag "check.png"%></a></li>
-      <% end %>
       <%= vote_unvote_solution_link solution %>
       <%= edit_solution_link solution %>
       <%= del_solution_link solution %>
+      <% if (can? :pick,solution.idea) && solution.idea.status == IDEA_STATUS_REVIEWED_SUCCESS %>
+	    <li style="margin:10px 0"><%= pick_unpick_link solution %></li>
+      <% elsif solution.pick %>
+	    <li><a href="javascript:;" class="tip-link" data-original-title="被选中的方案" data-placement="right" ><%= image_tag "check.png"%></a></li>
+      <% end %>
 	</ul>
   </div>
 </div>

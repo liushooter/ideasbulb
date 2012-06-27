@@ -11,6 +11,7 @@ class SolutionsControllerTest < ActionController::TestCase
     @user_tom_under_review = ideas(:user_tom_under_review)    
     @user_tom_launched = ideas(:user_tom_launched)    
     @user_tom = users(:user_tom)
+    @admin_jack = users(:admin_jack)
   end
 
   test "everybody not create" do
@@ -115,4 +116,47 @@ class SolutionsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "login user not pick solution" do
+    sign_in @user_tom
+    xhr :put,:pick,id: @user_tom_solution_reviewed_success.to_param
+    assert_redirected_to root_path
+    assert_equal I18n.t('unauthorized.manage.all'),flash[:alert]
+  end
+
+  test "login user not unpick solution" do
+    sign_in @user_tom
+    xhr :put,:unpick,id: @user_tom_solution_reviewed_success.to_param
+    assert_redirected_to root_path
+    assert_equal I18n.t('unauthorized.manage.all'),flash[:alert]
+  end
+
+  test "admin pick solution" do
+    sign_in @admin_jack
+    xhr :put,:pick,id: @user_tom_solution_reviewed_success.to_param
+    assert Solution.find(@user_tom_solution_reviewed_success.id).pick
+    assert_response :success
+  end
+
+  test "admin unpick solution" do
+    sign_in @admin_jack
+    xhr :put,:unpick,id: @user_tom_solution_reviewed_success.to_param
+    assert !Solution.find(@user_tom_solution_reviewed_success.id).pick
+    assert_response :success
+  end
+
+  test "admin not pick solution of launched idea" do
+    sign_in @admin_jack
+    xhr :put,:pick,id: @user_tom_solution_launched.to_param
+    assert assigns(:solution).errors.any?
+    assert_equal @user_tom_solution_launched.pick,Solution.find(@user_tom_solution_launched.id).pick
+    assert_response :success
+  end
+
+  test "admin not unpick solution of launched idea" do
+    sign_in @admin_jack
+    xhr :put,:unpick,id: @user_tom_solution_launched.to_param
+    assert assigns(:solution).errors.any?
+    assert_equal @user_tom_solution_launched.pick,Solution.find(@user_tom_solution_launched.id).pick
+    assert_response :success
+  end
 end

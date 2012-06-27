@@ -4,8 +4,8 @@ class Idea < ActiveRecord::Base
   belongs_to :topic
   has_many :favorers,:through => :favors,:source =>:user
   has_many :favors
-  has_many :comments,:order => "created_at"
-  has_many :solutions,:order => "points desc"
+  has_many :comments,:order => "created_at desc"
+  has_many :solutions,:order => "pick desc,points desc,created_at desc"
 
   self.per_page = 30
 

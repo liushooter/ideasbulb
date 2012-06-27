@@ -53,7 +53,7 @@ class IdeasController < ApplicationController
     when IDEA_STATUS_UNDER_REVIEW
       check_status(IDEA_STATUS_REVIEWED_SUCCESS)
     when IDEA_STATUS_REVIEWED_SUCCESS
-      if !params[:solutionIds]
+      if @idea.solutions.where(:pick => true).count == 0
         flash[:alert] = I18n.t('app.error.idea.pick_solution') 
       else
         check_status(IDEA_STATUS_LAUNCHED)
@@ -63,7 +63,6 @@ class IdeasController < ApplicationController
     end
     if !flash[:alert]
       @idea.is_handle = true
-      @idea.solutions.find(params[:solutionIds]).each{|solution| solution.update_attribute(:pick,true)} if params[:solutionIds]
       @idea.update_attributes(:status => params[:status])
     end
     redirect_to @idea 
@@ -102,6 +101,24 @@ class IdeasController < ApplicationController
   def unfavoriate
     @idea = Idea.find(params[:id])
     @idea.favorers.destroy(current_user)
+  end
+
+  def more_solutions
+    page_size = 5
+    @idea = Idea.find(params[:id])
+    @page = params[:page].to_i
+    offset = @page*page_size+2
+    @have_more = @idea.solutions.count > offset+page_size
+    @solutions =  @idea.solutions.limit(page_size).offset(offset)
+  end
+
+  def more_comments
+    page_size = 5
+    @idea = Idea.find(params[:id])
+    @page = params[:page].to_i
+    offset = @page*page_size+2
+    @have_more = @idea.comments.count > offset+page_size
+    @comments =  @idea.comments.limit(page_size).offset(offset)
   end
 
   private

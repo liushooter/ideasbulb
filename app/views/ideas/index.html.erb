@@ -13,6 +13,6 @@
   </div>
 </div>
 <div id="ideas-main">
-   <%= render @ideas %>
+  <%= render @ideas %>
   <%= will_paginate @ideas,:class => "pagination pagination-right",:id => "ideas-pagination",:params => {:controller => "ideas",:action => "tab",:status => IDEA_STATUS_REVIEWED_SUCCESS} %>
 </div>

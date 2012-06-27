@@ -12,41 +12,21 @@
 	</ul>
   </div>
   <div class="span7">
-    <%= render :partial => "form",:locals => {:idea => idea } %>
-    <%= render idea.solutions %>
-    <div style="display:none" id="after-solutions-<%=idea.id%>"></div>
 
-    <% if !@idea_page && idea.comments_count > 2%>
-      <div class="row"><div class="span7 seperator"></div><div class="span7 show-more"><a href="javascript:;" data-more="<%= idea.comments_count-2%>">查看<%= idea.comments_count-2%>条旧评论</a></div></div>
-      <% idea.comments.each_with_index do |comment,index| %>
-        <% if index < idea.comments_count-2 %>
-          <div style="display:none"><%= render comment %></div>
-        <% else %>
-          <%= render comment %>
-        <% end %>
-      <% end %>
-    <% else %>
-      <%= render idea.comments %>
-    <% end %>
+    <%= render :partial => "form",:locals => {:idea => idea } %>
 
     <% if user_signed_in? %> 
-      <div class="row" id="after-comments-<%=idea.id%>"></div>
       <div class="row">
-        <div class="span7 seperator"></div>
         <div class="span7 btn-toolbar" id="action-button-<%=idea.id%>">
           <%= new_solution_button idea %>
           <%= new_comment_button idea %>
           <%= favor_unfavor_button idea %>
         </div>
-        <div class="span7" id="add-comment-<%=idea.id%>" style="display:none">
-          <%= form_for([idea,Comment.new],:remote => true,:html =>{:class=>"well"}) do |f| %>
-            <a class="close" data-idea="<%= idea.id %>" style="cursor:hand">&times;</a>
-            <%= f.label :content %>
-	        <%= f.text_area :content,:class => "span6",:style => "height:80px;overflow-y:auto" %>
-            <p class="help-block"><%= t('app.info.content_tip')%></p>
-            <%= f.submit "发布",:class=>"btn btn-primary",:style=>"margin-top:5px",:disable_with => "发布中..." %>
-	      <% end %>
-        </div>
+      </div>
+    <% end %>
+
+    <% if user_signed_in? %> 
+      <div class="row">
         <div class="span7" id="add-solution-<%=idea.id%>" style="display:none">
           <%= form_for([idea,Solution.new],:remote => true,:html =>{:class=>"well"}) do |f| %>
             <a class="close" data-idea="<%= idea.id %>" style="cursor:hand">&times;</a>
@@ -59,6 +39,43 @@
 	      <% end %>
         </div>
       </div>
+      <div style="display:none" id="before-solutions-<%=idea.id%>"></div>
     <% end %>
+
+    <% if @idea_page %>
+      <%= render idea.solutions %>
+    <% else %>
+      <%= render idea.solutions.limit(2) %>
+      <div style="display:none" id="after-solutions-<%=idea.id%>"></div>
+      <% if idea.solutions.count > 2 %>
+        <div class="row" id="more-solutions-<%=idea.id%>"><div class="span7 show-more"><%= link_to "查看更多方案",more_solutions_idea_path(idea,:page => 0),:remote=>true %></div></div>
+      <% end %>
+    <% end %>
+
+    <% if user_signed_in? %> 
+      <div class="row">
+        <div class="span7" id="add-comment-<%=idea.id%>" style="display:none">
+          <%= form_for([idea,Comment.new],:remote => true,:html =>{:class=>"well"}) do |f| %>
+            <a class="close" data-idea="<%= idea.id %>" style="cursor:hand">&times;</a>
+            <%= f.label :content %>
+	        <%= f.text_area :content,:class => "span6",:style => "height:80px;overflow-y:auto" %>
+            <p class="help-block"><%= t('app.info.content_tip')%></p>
+            <%= f.submit "发布",:class=>"btn btn-primary",:style=>"margin-top:5px",:disable_with => "发布中..." %>
+	      <% end %>
+        </div>
+      </div>
+      <div style="display:none" id="before-comments-<%=idea.id%>"></div>
+    <% end %>
+
+    <% if @idea_page %>
+      <%= render idea.comments %>
+    <% else %>
+      <%= render idea.comments.limit(2) %>
+      <div style="display:none" id="after-comments-<%=idea.id%>"></div>
+      <% if idea.comments.count > 2 %>
+        <div class="row" id="more-comments-<%=idea.id%>"><div class="span7 show-more"><%= link_to "查看更多评论",more_comments_idea_path(idea,:page => 0),:remote=>true %></div></div>
+      <% end %>
+    <% end %>
+
   </div>
 </div>

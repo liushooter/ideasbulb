@@ -33,6 +33,16 @@ class IdeasControllerTest < ActionController::TestCase
     assert assigns(:idea_page)
   end
 
+  test "everybody get more solutions" do
+    xhr :get,:more_solutions,{:id=> @user_tom_under_review.id,:page => 0}
+    assert_response :success
+  end
+
+  test "everybody get more comments" do
+    xhr :get,:more_comments,{:id=> @user_tom_under_review.id,:page => 0}
+    assert_response :success
+  end
+
   test "everybody not create" do
     xhr :post,:create
     assert_redirected_to root_path
@@ -140,23 +150,15 @@ class IdeasControllerTest < ActionController::TestCase
 
   test "admin launched valid idea" do
     sign_in @admin_jack
-    post :handle,{id: @user_tom_reviewed_success.to_param,:status => IDEA_STATUS_LAUNCHED,:solutionIds => [@user_tom_solution_reviewed_success.id,@user_zhang_solution_reviewed_success.id]}
+    post :handle,{id: @user_tom_reviewed_success.to_param,:status => IDEA_STATUS_LAUNCHED}
     assert_redirected_to idea_path(assigns(:idea))
     assert_nil flash[:alert]
     assert_equal IDEA_STATUS_LAUNCHED,Idea.find(@user_tom_reviewed_success.id).status
   end
 
-  test "admin launched valid idea with wrong solution" do
-    sign_in @admin_jack
-    assert_raise(ActiveRecord::RecordNotFound){
-      post :handle,{id: @user_zhang_reviewed_success.to_param,:status => IDEA_STATUS_LAUNCHED,:solutionIds => [@user_tom_solution_reviewed_success.id,@user_zhang_solution_reviewed_success.id]}
-    }
-    assert_equal IDEA_STATUS_REVIEWED_SUCCESS,Idea.find(@user_zhang_reviewed_success.id).status
-  end
-  
   test "admin launched invalid idea" do
     sign_in @admin_jack
-    post :handle,{id: @user_tom_reviewed_success.to_param,:status => IDEA_STATUS_UNDER_REVIEW,:solutionIds => [@user_tom_solution_reviewed_success.id,@user_zhang_solution_reviewed_success.id]}
+    post :handle,{id: @user_tom_reviewed_success.to_param,:status => IDEA_STATUS_UNDER_REVIEW}
     assert_redirected_to idea_path(assigns(:idea))
     assert_equal I18n.t('app.error.idea.status',:status => I18n.t("app.idea.status.#{IDEA_STATUS_LAUNCHED}")),flash[:alert]
     assert_equal IDEA_STATUS_REVIEWED_SUCCESS,Idea.find(@user_tom_reviewed_success.id).status
@@ -164,7 +166,7 @@ class IdeasControllerTest < ActionController::TestCase
 
   test "admin launched idea with no solution" do
     sign_in @admin_jack
-    post :handle,{id: @user_tom_reviewed_success.to_param,:status => IDEA_STATUS_LAUNCHED}
+    post :handle,{id: @user_zhang_reviewed_success.to_param,:status => IDEA_STATUS_LAUNCHED}
     assert_redirected_to idea_path(assigns(:idea))
     assert_equal I18n.t('app.error.idea.pick_solution'),flash[:alert]
     assert_equal IDEA_STATUS_REVIEWED_SUCCESS,Idea.find(@user_tom_reviewed_success.id).status

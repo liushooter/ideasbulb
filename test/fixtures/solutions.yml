@@ -32,3 +32,4 @@ user_zhang_solution_reviewed_success:
   points: 1
   idea: "user_tom_reviewed_success" 
   user: "user_zhang"
+  pick: true

@@ -44,4 +44,19 @@ module SolutionsHelper
     end 
   end
 
+  def pick_solution_link(solution)
+	link_to I18n.t("app.solution.pick"),pick_solution_path(solution),:method=>:put,:remote => true,:id => "pick-link-#{solution.id}",:class=>"btn btn-success"
+  end
+
+  def unpick_solution_link(solution)
+	link_to I18n.t("app.solution.unpick"),unpick_solution_path(solution),:method=>:put,:remote => true,:id => "unpick-link-#{solution.id}",:class=>"btn btn-danger"
+  end
+
+  def pick_unpick_link(solution)
+    if solution.pick
+      unpick_solution_link(solution)
+    else
+      pick_solution_link(solution)
+    end
+  end
 end
