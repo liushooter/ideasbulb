@@ -59,8 +59,8 @@ img.profile_picture_small {
   border:1px solid #DDD;
 }
 .indicator{
-  width:16px;
-  height:16px;
+  width:24px;
+  height:24px;
   background: url("loading.gif") no-repeat;
   margin:20px auto;
 }
