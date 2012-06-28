@@ -142,3 +142,4 @@ jQuery ($) ->
  initIdeas() if $('#ideas-main').length > 0
  initIdea() if $('#idea-main').length > 0
  $('#modal-add-idea').on('show', -> $('#add-idea-title-input').val($('#nav-idea-title-input').val()))
+ $('#nav-idea-title-input').autocomplete({serviceUrl:'/ideas/promotion',width:400,onSelect :(value, data) -> location.href="/ideas/"+data })

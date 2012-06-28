@@ -23,11 +23,11 @@ class IdeasController < ApplicationController
   end
 
   def promotion
-    @ideas=Idea.search do
-      keywords params[:title]
-      paginate :per_page => 20 
+    ideas=Idea.search do
+      keywords params[:query]
+      paginate :per_page => 10 
     end.results
-    render :layout => false
+    render :json => {:query=>params[:query],:suggestions => ideas.collect{|idea| idea.title},:data => ideas.collect{|idea| idea.id} }.to_json
   end
   
   def show

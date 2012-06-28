@@ -43,6 +43,18 @@ class IdeasControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "everybody not promotion" do
+    xhr :get,:promotion,{:query => "test"}
+    assert_redirected_to root_path
+    assert_equal I18n.t('unauthorized.manage.all'),flash[:alert]
+  end
+
+  test "login user get promotion" do
+    sign_in @user_tom
+    xhr :get,:promotion,{:query => "test"}
+    assert_response :success
+  end
+
   test "everybody not create" do
     xhr :post,:create
     assert_redirected_to root_path
