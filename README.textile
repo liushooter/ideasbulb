@@ -39,7 +39,7 @@ h2. 安装指南
 h2. 作者
 
 但江(danjiang5956@gmail.com)
-"http://twitter.com/dandan5956":http://twitter.com/dandan5956
+"http://twitter.com/danthoughtcom":http://twitter.com/danthoughtcom
 "http://www.danthought.com":http://www.danthought.com
 
 h2. 开源协议
