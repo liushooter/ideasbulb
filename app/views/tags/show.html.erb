@@ -1,0 +1,26 @@
+<% title "标签 - #{@tag.name} - #{Preference.option(PREFERENCE_SITE_NAME)}" %>
+<div class="head-title">
+  <h1>标签：<%=@tag.name%></h1>
+</div>
+<ul class="nav nav-tabs" id="nav-status">
+  <li><%= link_to '新发布',tab_ideas_path(:status => IDEA_STATUS_UNDER_REVIEW,:tag_id => @tag.id),:remote=>true %></li>
+  <li class="active"><%= link_to '投票中',tab_ideas_path(:status => IDEA_STATUS_REVIEWED_SUCCESS,:tag_id => @tag.id),:remote=>true  %></li>
+  <li><%= link_to '已实施',tab_ideas_path(:status => IDEA_STATUS_LAUNCHED,:tag_id => @tag.id),:remote=>true  %></li>
+</ul>
+<div class="row">
+  <div class="span2 offset7">
+    <%= form_tag tab_ideas_path,:method => :get ,:remote => true,:id=>"ideas-sort-form" do %>  
+      <%= hidden_field_tag :tag_id,@tag.id %>  
+      <%= select_tag(:sort, options_for_select([['最热门', IDEAS_SORT_HOT], ['最新的', IDEAS_SORT_NEWEST]]),:class=>"span2",:id=>"ideas-sort-select") %>
+    <% end %>
+  </div>
+</div>
+<div id="ideas-main">
+  <% if @ideas.empty? %>
+    <p style="text-align:center">抱歉，没有结果。</p>
+  <% else %>
+    <%= render @ideas %>
+    <div class="seperator"></div>
+    <%= will_paginate @ideas,:class => "pagination pagination-right",:id => "ideas-pagination",:params => {:controller => "ideas",:action => "tab",:status => IDEA_STATUS_REVIEWED_SUCCESS,:tag_id => @tag.id} %>
+  <% end %>
+</div>

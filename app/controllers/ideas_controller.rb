@@ -2,15 +2,8 @@ class IdeasController < ApplicationController
   authorize_resource
 
   def index
-    @status = params[:status ] ? params[:status] : IDEA_STATUS_REVIEWED_SUCCESS
-    conditions = {}
-    conditions[:status] = @status 
-    if params[:topic_id]
-      @topic_id = params[:topic_id].to_i
-      conditions[:topic_id] = @topic_id 
-    end
-    @ideas = Idea.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions).order(hot_sort)
-    render :layout => "list"
+    @topics = Topic.all
+    @tags = Tag.where("ideas_count>0").order("ideas_count desc") 
   end
 
   def search
@@ -33,6 +26,7 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.includes(:tags,:user,:topic,:comments,:solutions,:favorers).find(params[:id])
     @idea_page = true
+    render :layout => "list"
   end
 
   def create
@@ -82,15 +76,12 @@ class IdeasController < ApplicationController
     end
     if params[:favorer_id]
       @ideas = User.find(params[:favorer_id]).favored_ideas.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions).order(sort)
+    elsif params[:tag_id] 
+      @ideas = Tag.find(params[:tag_id]).ideas.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions).order(sort)
     else
       @ideas = Idea.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where(conditions).order(sort)
     end
     render :layout => false
-  end
-
-  def tag
-    @tag = Tag.find(params[:tag_id])
-    @ideas = @tag.ideas.paginate(:page => params[:page])
   end
 
   def favoriate
@@ -128,7 +119,4 @@ class IdeasController < ApplicationController
     end
   end
 
-  def hot_sort
-    "(2*`solutions_count`+`comments_count`+`solutions_points`)/POW(TIMESTAMPDIFF(HOUR,`ideas`.`created_at`,NOW())+2,1.5) DESC" 
-  end
 end

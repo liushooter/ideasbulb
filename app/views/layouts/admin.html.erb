@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IdeasBulb</title>
+  <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= favicon_link_tag 'apple-touch-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
+  <%= favicon_link_tag 'apple-touch-icon-72x72.png', :rel => 'apple-touch-icon', :type => 'image/png', :sizes => '72x72' %>
+  <%= favicon_link_tag 'apple-touch-icon-114x114.png', :rel => 'apple-touch-icon', :type => 'image/png', :sizes => '114x114' %>
 </head>
 <body>
   <div class="navbar navbar-fixed-top">
@@ -23,19 +27,7 @@
   <div class="container-fluid">
   <div class="content">
     <div class="row-fluid">
-      <div class="span3">
-        <div class="well sidebar-nav">
-          <ul class="nav nav-list">
-            <li class="active"><%= link_to dashboard_preferences_path,:remote => true,:id => "nav-home" do %><i class="icon-home icon-white"></i> 首页<% end %></li>
-			<li><%= link_to topics_path,:remote => true,:id => "nav-topic" do %><i class="icon-list"></i> 主题管理<% end %></li>
-			<li><%= link_to users_path,:remote => true,:id => "nav-user" do %><i class="icon-user"></i> 用户管理<% end %></li>
-			<li><%= link_to preferences_path,:remote => true,:id => "nav-setting" do %><i class="icon-cog"></i> 站点设置<% end %></li>
-          </ul>
-        </div>
-      </div>
-      <div class="span9" id="admin-main">
-        <%= yield %>
-      </div>
+      <%= yield %>
     </div>
   </div>
   <%= render "common/footer"%>

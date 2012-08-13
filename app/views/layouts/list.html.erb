@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IdeasBulb</title>
+  <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -23,28 +23,19 @@
               <i class="icon-search"></i>
             <% end %>
 		  <% end %>
-		  <ul class="nav nav-pills nav-stacked" id="nav-owner-ideas">
-			<%= tab_item_tag nil,@topic_id do %><%= link_to '所有的主意',tab_ideas_path(:all => true),:remote=>true %><% end %>
-            <% if user_signed_in? %>
-			  <li><%= link_to '发布的主意',tab_ideas_path(:user_id => current_user.id),:remote=>true %></li>
-			  <li><%= link_to '关注的主意',tab_ideas_path(:favorer_id => current_user.id),:remote=>true %></li>
-            <% end %>
-		  </ul>
           <% if Topic.count > 0 %>
 		    <h4>主题</h4>
-		    <ul class="nav nav-pills nav-stacked" id="nav-topic-ideas">
+		    <ul class="unstyled topics">
               <% Topic.all.each do |topic| %>
-			    <%= tab_item_tag topic.id,@topic_id do %><%= link_to tab_ideas_path(:topic_id => topic.id),:remote=>true do %><i class="icon-list"></i>&nbsp;<%= topic.name %><% end %><% end %>
+			    <li><i class="icon-comment"></i>&nbsp;<%= link_to topic.name,topic_path(topic.name) %></li>
               <% end %>
 	        </ul>
           <% end %>
           <% if Tag.count > 0 %>
 			<h4>热门标签</h4>
 			<ul class="unstyled hot-tags">
-              <% Tag.limit(15).order("ideas_count desc").each do |tag| %>
-                <% if tag.ideas_count > 0 %>
-				<li><i class="icon-tag"></i>&nbsp;<%= link_to tag.name,tag_ideas_path(:tag_id => tag.id) %><span class="shallow">&nbsp;x&nbsp;<%= tag.ideas_count %></span></li>
-                <% end %>
+              <% Tag.limit(15).order("ideas_count desc").where("ideas_count>0").each do |tag| %>
+				<li><i class="icon-tag"></i>&nbsp;<%= link_to tag.name,tag_path(tag.name) %><span class="shallow">&nbsp;x&nbsp;<%= tag.ideas_count %></span></li>
               <% end %>
 			</ul>
           <% end %>

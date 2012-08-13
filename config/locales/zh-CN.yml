@@ -17,7 +17,7 @@ zh-CN:
         tag_names: "标签"
         tags: "标签"
         status: "状态"
-        topic: "主题"
+        topic: "话题"
       user:
         username: "用户名"
         password: "密码"
@@ -40,7 +40,11 @@ zh-CN:
         title: "方案"
         content: "描述"
       topic:
-        name: "主题名称"
+        name: "话题名称"
+        website: "主页"
+        description: "介绍"
+        logo_file_size: "Logo大小"
+        logo_content_type: "Logo格式"
   #for application
   app:
     info:
@@ -48,10 +52,12 @@ zh-CN:
     error:
       head: "请改正如下错误"
       topic:
-        zero_ideas: "不能删除主意数量不为零的主题"
+        zero_ideas: "不能删除主意数量不为零的话题"
+        logo_file_size: "最大为50KB"
+        logo_content_type: "只能为JPEG和PNG"
       user:
         username_format: "只能包含字母和数字"
-        avatar_size: "最大为50KB"
+        avatar_file_size: "最大为50KB"
         avatar_content_type: "只能为JPEG和PNG"
       idea:
         tags_number: "不能超过3个"

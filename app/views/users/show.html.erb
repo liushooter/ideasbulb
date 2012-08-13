@@ -1,32 +1,35 @@
-<div class="span8 offset2">
-  <ul class="unstyled user-info">
-    <li><h3><%= @user.username %></h3></li>
-    <li><%= role_tag @user %></li>
-    <li>积分：<%= @user.points %></li>
-    <li><%= image_tag @user.avatar.url(:medium),:class => "profile_picture_medium" %></li>
-    <% if @user.website %><li><%= link_to @user.website,@user.website %></li><% end %>
-    <li class="shallow"><%= @user.description %></li>
+<% title "用户 - #{@user.username} - #{Preference.option(PREFERENCE_SITE_NAME)}" %>
+<div class="row head-title">
+  <div class="span2">
+    <%=  image_tag(@user.avatar.url(:medium),:class=>"profile_picture_medium") %>
+  </div>
+  <div class="span7">
+    <h1><%= @user.username %></h1>
+    <ul class="unstyled user-info">
+      <li><span class="label label-info"><%= role_tag @user %></span></li>
+      <li><span class="label label-success"><%= @user.points %>个积分</span> <span class="label label-success">发布<%= @user.ideas.count %>个主意</span> <span class="label label-success">关注<%= @user.favored_ideas.count %>个主意</span> <span class="label label-success">发布<%= @user.solutions.count %>个解决方案</span> <span class="label label-success">发布<%= @user.comments.count %>个评论</span></li>
+      <% if @user.website %><li><%= link_to @user.website,@user.website %></li><% end %>
+      <li class="shallow"><%= @user.description %></li>
   </ul>
-  <% if @user.ideas.count > 0 %>
-    <div class="page-header"><h3>发布的主意</h3></div>
-    <ul id="list-ideas">
-      <% @user.ideas.order("created_at desc").limit(10).each do |idea| %>
-        <li><%= link_to idea.title,idea %></li>
-      <% end %>
-    </ul>
-    <% if @user.ideas.count > 10 %>
-      <div style="text-align:right"><%= button_to "查看更多",more_ideas_user_path(@user),:remote => true,:method=>:get,:disable_with => "加载中...",:class=>"btn",:form =>{:id =>"user-more-ideas"}%></div>
+  </div>
+</div>
+<ul class="nav nav-tabs" id="nav-status">
+  <li class="active"><%= link_to '发布的',tab_ideas_path(:user_id => @user.id),:remote=>true %></li>
+  <li><%= link_to '关注的',tab_ideas_path(:favorer_id => @user.id),:remote=>true  %></li>
+</ul>
+<div class="row">
+  <div class="span2 offset7">
+    <%= form_tag tab_ideas_path,:method => :get ,:remote => true,:id=>"ideas-sort-form" do %>  
+      <%= select_tag(:sort, options_for_select([['最热门', IDEAS_SORT_HOT], ['最新的', IDEAS_SORT_NEWEST]]),:class=>"span2",:id=>"ideas-sort-select") %>
     <% end %>
-  <% end %>
-  <% if @user.favored_ideas.count > 0 %>
-    <div class="page-header"><h3>关注的主意</h3></div>
-    <ul id="list-favor-ideas">
-      <% @user.favored_ideas.order("created_at desc").limit(10).each do |idea| %>
-        <li><%= link_to idea.title,idea %></li>
-      <% end %>
-    </ul>
-    <% if @user.favored_ideas.count > 10 %>
-      <div style="text-align:right"><%= button_to "查看更多",more_favored_user_path(@user),:remote => true,:method=>:get,:disable_with => "加载中...",:class=>"btn",:form =>{:id =>"user-more-favor-ideas"}%></div>
-    <% end %>
+  </div>
+</div>
+<div id="ideas-main">
+  <% if @ideas.empty? %>
+    <p style="text-align:center">抱歉，没有结果。</p>
+  <% else %>
+    <%= render @ideas %>
+    <div class="seperator"></div>
+    <%= will_paginate @ideas,:class => "pagination pagination-right",:id => "ideas-pagination",:params => {:controller => "ideas",:action => "tab",:user_id => @user.id} %>
   <% end %>
 </div>

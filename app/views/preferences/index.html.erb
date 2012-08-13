@@ -1,17 +1,30 @@
-<div class="page-header">
-  <h1>站点设置</h1>
+<% title "站点设置 - 控制面板" %>
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li><%= link_to dashboard_preferences_path do %><i class="icon-home"></i> 首页<% end %></li>
+	  <li><%= link_to topics_path do %><i class="icon-comment"></i> 话题管理<% end %></li>
+	  <li><%= link_to users_path do %><i class="icon-user"></i> 用户管理<% end %></li>
+	  <li class="active"><%= link_to preferences_path do %><i class="icon-cog icon-white"></i> 站点设置<% end %></li>
+    </ul>
+  </div>
 </div>
-<%= form_tag update_basic_preferences_path,:method => :put,:remote => true,:class => "form-horizontal",:id => "preference-form" do %>
-  <fieldset>
-    <div class="control-group">
-      <%= label_tag "website-name-input",t("app.preference.site_name"),:class=> "control-label" %>
-      <div class="controls">
-        <%= text_field_tag(:preference_site_name,Preference.option(PREFERENCE_SITE_NAME),:class=>"input-xlarge",:id=>"website-name-input") %>
-        <p class="help-block">显示在顶部导航栏里和页面标题</p>
+<div class="span9" id="admin-main">
+  <div class="page-header">
+    <h1>站点设置</h1>
+  </div>
+  <%= form_tag update_basic_preferences_path,:method => :put,:remote => true,:class => "form-horizontal",:id => "preference-form" do %>
+    <fieldset>
+      <div class="control-group">
+        <%= label_tag "website-name-input",t("app.preference.site_name"),:class=> "control-label" %>
+        <div class="controls">
+          <%= text_field_tag(:preference_site_name,Preference.option(PREFERENCE_SITE_NAME),:class=>"input-xlarge",:id=>"website-name-input") %>
+          <p class="help-block">显示在顶部导航栏里和页面标题</p>
+        </div>
       </div>
-    </div>
-    <div class="form-actions">
-      <%= submit_tag "修改",:class=>"btn btn-primary",:disable_with => "修改中..." %>
-    </div>
-  </fieldset>
-<% end %>
+      <div class="form-actions">
+        <%= submit_tag "修改",:class=>"btn btn-primary",:disable_with => "修改中..." %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

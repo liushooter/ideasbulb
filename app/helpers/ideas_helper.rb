@@ -1,17 +1,18 @@
 module IdeasHelper
 
   def status_span_tag(idea)
-    content_tag :span,link_to(I18n.t("app.idea.status.#{idea.status}"),root_path(:status => idea.status)),:class => "bold"
+    content_tag :span,I18n.t("app.idea.status.#{idea.status}"),:class => "bold"
   end
 
   def handle_idea_button(idea)
     if (can? :handle,idea) && idea.status != IDEA_STATUS_LAUNCHED
       case idea.status
       when IDEA_STATUS_UNDER_REVIEW
-        content_tag(:div,link_to(I18n.t("app.idea.handle.#{idea.status}"),handle_idea_path(idea,:status => IDEA_STATUS_REVIEWED_SUCCESS),:class => "btn btn-primary btn-large",:method => :put),:class =>"btn-group")
-      when IDEA_STATUS_REVIEWED_SUCCESS 
-        content_tag(:div,link_to(I18n.t("app.idea.handle.#{idea.status}"),handle_idea_path(idea,:status => IDEA_STATUS_LAUNCHED),:class => "btn btn-primary btn-large",:method => :put,:id=>"launched-buton"),:class =>"btn-group")
+        button = link_to(I18n.t("app.idea.handle.#{idea.status}"),handle_idea_path(idea,:status => IDEA_STATUS_REVIEWED_SUCCESS),:class => "btn btn-warning btn-large",:method => :put)
+      when IDEA_STATUS_REVIEWED_SUCCESS
+        button = link_to(I18n.t("app.idea.handle.#{idea.status}"),handle_idea_path(idea,:status => IDEA_STATUS_LAUNCHED),:class => "btn btn-warning btn-large",:method => :put) 
       end
+      content_tag(:div,button,:class =>"head-title well") if button
     end
   end
 

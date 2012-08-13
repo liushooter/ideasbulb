@@ -1,9 +1,9 @@
 <div class="row" id="solution-<%= solution.id %>">
   <div class="span7 seperator"></div>
   <div class="span6">
-    <div class="solution-profile"><%= link_to image_tag(solution.user.avatar.url(:thumb),:class=>"profile_picture_small"),user_path(solution.user) %></div>
+    <div class="solution-profile"><%= link_to image_tag(solution.user.avatar.url(:thumb),:class=>"profile_picture_small"),user_path(solution.user.username) %></div>
     <div class="solution">
-	  <div class="solution-info"><%= link_to solution.user.username,user_path(solution.user) %>，<span class="bold"><%= solution.title %></span></div>
+	  <div class="solution-info"><%= link_to solution.user.username,user_path(solution.user.username) %>，<span class="bold"><%= solution.title %></span></div>
 	  <div class="solution-info"><span class="label label-warning" id="solution-points-<%= solution.id %>"><%= solution.points %>分</span></div>
 	  <div class="solution-entry <%= solution.user.admin ? 'highlight':''%>"><%= auto_link(solution.content) %></div>
 	  <div class="solution-date shallow"><%= distance_of_time_in_words_to_now solution.created_at %>前</div>

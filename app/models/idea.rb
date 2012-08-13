@@ -7,7 +7,7 @@ class Idea < ActiveRecord::Base
   has_many :comments,:order => "created_at desc"
   has_many :solutions,:order => "pick desc,points desc,created_at desc"
 
-  self.per_page = 30
+  self.per_page = 5
 
   attr_accessor :is_handle
   attr_accessor :tmp_tag_ids

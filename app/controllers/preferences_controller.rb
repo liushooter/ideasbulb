@@ -18,7 +18,7 @@ class PreferencesController < ApplicationController
   end
  
   def index
-    render :layout => false
+    render :layout => "admin"
   end
   
   def update_basic

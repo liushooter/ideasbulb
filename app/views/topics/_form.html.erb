@@ -1,0 +1,59 @@
+<% title "#{action}话题 - 控制面板" %>
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li><%= link_to dashboard_preferences_path do %><i class="icon-home"></i> 首页<% end %></li>
+	  <li class="active"><%= link_to topics_path do %><i class="icon-comment icon-white"></i> 话题管理<% end %></li>
+	  <li><%= link_to users_path do %><i class="icon-user"></i> 用户管理<% end %></li>
+	  <li><%= link_to preferences_path do %><i class="icon-cog"></i> 站点设置<% end %></li>
+    </ul>
+  </div>
+</div>
+<div class="span9" id="admin-main">
+  <ul class="breadcrumb">
+    <li>
+      <%= link_to '话题管理',topics_path %> <span class="divider">/</span>
+    </li>
+    <li class="active"><%= action %>话题</li>
+  </ul>
+  <div class="page-header">
+    <h1><%= action %>话题</h1>
+  </div>
+  <%= errors_msg_tag @topic %>
+  <%= form_for(@topic,:html=>{:multipart => true,:class=>"form-horizontal"}) do |f| %>
+    <div class="control-group">
+      <%= f.label :name,:class=>"control-label" %>
+	  <div class="controls">
+        <%= f.text_field :name,:class=>"input-xlarge" %>
+	  </div>
+	</div>
+	<div class="control-group">
+      <%= f.label :website,:class=>"control-label" %>
+	  <div class="controls">
+        <%= f.text_field :website,:class=>"input-xlarge" %>
+        <p class="help-block">以 http:// 开头，如 http://example.com</p>
+	  </div>
+	</div>
+	<div class="control-group">
+      <%= f.label :description,:class=>"control-label" %>
+	  <div class="controls">
+        <%= f.text_area :description,:class=>"input-xlarge",:rows=>"5" %>
+        <p class="help-block">简短明了，不超过160个字符</p>
+	  </div>
+	</div>
+	<div class="control-group">
+	  <label class="control-label">Logo图片</label>
+	  <div class="controls"><%= image_tag @topic.logo.url(:medium),:class => "profile_picture_medium" %></div>
+	</div>
+	<div class="control-group">
+	  <label class="control-label">上传Logo图片</label>
+	  <div class="controls">
+        <%= f.file_field :logo,:class=>"input-xlarge" %>
+        <p class="help-block">头像格式为JPEG和PNG，并且大小不超过50KB</p>
+	  </div>
+	</div>
+	<div class="form-actions">
+      <%= f.submit "#{action}",:class => "btn btn-large btn-primary",:disable_with => "#{action}中..." %>
+	</div>
+  <% end %>
+</div>

@@ -2,5 +2,6 @@
 <p style="text-align:center">抱歉，没有结果。</p>
 <% else %>
   <%= render @ideas %>
+  <div class="seperator"></div>
   <%= will_paginate @ideas,:class => "pagination pagination-right",:id => "ideas-pagination",:params => {:controller => "ideas",:action => "tab"} %>
 <% end %>

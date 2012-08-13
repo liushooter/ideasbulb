@@ -86,6 +86,9 @@ div.seperator{
   padding-top:18px;
   border-top: 1px solid #DDD;
 }
+div.head-title{
+ margin-bottom:30px;
+}
 div.idea-title{
   font-size: 18px;
   line-height: 20px;
@@ -122,10 +125,10 @@ div.page{
   padding-top:10px;
   border-top: 1px solid #DDD;
 }
-ul.hot-tags{
+ul.hot-tags,ul.topics{
   padding-left:15px;
 }
-ul.hot-tags li{
+ul.hot-tags li,ul.topics li{
 	margin:10px 0;
 }
 div.show-more{
@@ -137,11 +140,14 @@ div.show-more{
 form.login-dropdown{
  margin:10px;
 }
+ul.favor-avatar{
+ margin:10px 0 30px 0;
+}
 ul.favor-avatar li{
- float:left;
+ display:inline-block;
  margin:2px;
 }
-ul.user-info li{
+ul.user-info li,ul.topic-info li{
  margin-top:5px;
 }
 p.more-ideas{
@@ -159,3 +165,27 @@ a.message{
 .autocomplete .selected { background:#F0F0F0; }
 .autocomplete div { padding:2px 5px; white-space:nowrap; }
 .autocomplete strong { font-weight:normal; color:#3399FF; }
+.home-user{
+ margin-top:20px;
+}
+.home-user-name{
+ margin-left:10px;
+}
+.home-idea-title{
+ margin-top:10px;
+ font-size: 18px;
+ line-height: 20px;
+ font-weight: 100;
+}
+.home-idea-entry{
+ margin-top:10px;
+}
+.section-topic{
+ margin-bottom:50px;
+}
+ul.home-tags{
+}
+ul.home-tags li{
+ display:inline-block;
+ margin:10px 5px;
+}

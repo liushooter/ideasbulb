@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates :username,:length => {:minimum => 3,:maximum => 14},:format => {:with => /\A[a-zA-Z0-9]+\z/,:message => I18n.t('app.error.user.username_format')}
   validates :description,:length => {:maximum => 40}
   validates_format_of :website, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,:allow_blank => true
-  validates :avatar,:attachment_content_type => {:content_type=>["image/jpeg","image/png"],:message => I18n.t('app.error.user.avatar_content_type')},:attachment_size => { :less_than => 50.kilobytes,:message => I18n.t('app.error.user.avatar_size') }
+  validates :avatar,:attachment_content_type => {:content_type=>["image/jpeg","image/png"],:message => I18n.t('app.error.user.avatar_content_type')},:attachment_size => { :less_than => 50.kilobytes,:message => I18n.t('app.error.user.avatar_file_size') }
 
   before_update do |user|
     user.website = nil if user.website && user.website.strip.empty?

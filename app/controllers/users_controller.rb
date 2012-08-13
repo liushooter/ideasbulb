@@ -7,21 +7,13 @@ class UsersController < ApplicationController
     else
       @users = User.paginate(:page => params[:page]).order("admin desc")
     end
-    render :layout => false
+    render :layout => "admin"
   end
 
   def show
-    @user = User.find(params[:id])
-  end
-
-  def more_ideas
-    @ideas = Idea.where("user_id = ?",params[:id]).order("created_at desc").limit(10).offset(params[:offset].to_i)
-    render :json => @ideas.to_json(:only => [:id,:title])
-  end
-
-  def more_favored
-    @ideas = User.find(params[:id]).favored_ideas.order("created_at desc").limit(10).offset(params[:offset].to_i)
-    render :json => @ideas.to_json(:only => [:id,:title])
+    @user = User.find_by_username(params[:id])
+    @ideas = @user.ideas.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).order(hot_sort)
+    render :layout => "list"
   end
 
   def authority

@@ -1,15 +1,28 @@
 class TopicsController < ApplicationController
   authorize_resource
-  layout false
+  layout "admin"
+
+  def show
+    @topic = Topic.find_by_name!(params[:id])
+    @ideas = @topic.ideas.paginate(:page => params[:page]).includes(:tags,:user,:topic,:comments,:solutions).where("status = ?",IDEA_STATUS_REVIEWED_SUCCESS).order(hot_sort)
+    render :layout => "list"
+  end
 
   def index
     @topics = Topic.order("created_at desc")
-    @topic = Topic.new
+  end
+
+  def new
+    @topic = Topic.new    
   end
 
   def create
     @topic = Topic.new(params[:topic])
-    @topic.save
+    if @topic.save
+      redirect_to :action => :index
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -17,9 +30,16 @@ class TopicsController < ApplicationController
     @topic.destroy
   end
 
-  def update
+  def edit
     @topic = Topic.find(params[:id])
-    @topic.update_attributes(params[:topic])
   end
 
+  def update
+    @topic = Topic.find(params[:id])
+    if @topic.update_attributes(params[:topic])
+      redirect_to :action => :index
+    else
+      render :edit
+    end
+  end
 end

@@ -1,11 +1,11 @@
 <div class="row" id="idea-<%=idea.id%>">
   <div class="span6">
     <div class="idea-title"><%= link_to idea.title,idea,:title => idea.title %></div>
-	<div class="idea-label"><%= status_span_tag idea %><span><i class="icon-list"></i>&nbsp;<%= link_to idea.topic.name,root_path(:topic_id => idea.topic_id) %></span>
+	<div class="idea-label"><%= status_span_tag idea %><span><i class="icon-comment"></i>&nbsp;<%= link_to idea.topic.name,topic_path(idea.topic.name) %></span>
       <% if idea.tags.any? %>
         <span><i class="icon-tags"></i>
         <% idea.tags.each do |tag| %>
-          <%= link_to tag.name,tag_ideas_path(:tag_id => tag.id) %>
+          <%= link_to tag.name,tag_path(tag.name) %>
         <% end %>
         </span>
       <% end %>

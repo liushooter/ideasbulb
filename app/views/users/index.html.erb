@@ -1,38 +1,53 @@
-<div class="page-header">
-  <h1>用户管理</h1>
+<% title "用户管理 - 控制面板" %>
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li><%= link_to dashboard_preferences_path do %><i class="icon-home"></i> 首页<% end %></li>
+	  <li><%= link_to topics_path do %><i class="icon-comment"></i> 话题管理<% end %></li>
+	  <li class="active"><%= link_to users_path do %><i class="icon-user icon-white"></i> 用户管理<% end %></li>
+	  <li><%= link_to preferences_path do %><i class="icon-cog"></i> 站点设置<% end %></li>
+    </ul>
+  </div>
 </div>
-<%= form_tag(users_path,:method => "get",:remote => true,:class => "form-inline",:id => "user-query-form") do %>
-  <label class = "control-label">输入用户名或邮箱</label>
-  <%= text_field_tag(:q,params[:q],:class => "span4") %>
-  <%= submit_tag "搜索用户",:class=>"btn btn-primary" %>
-<% end %>
-<table class="table table-bordered table-striped">
-  <thead>
-	<tr>
-      <th>用户名</th>
-	  <th>邮箱</th>
-	  <th>是否管理员</th>
-	  <th>注册日期</th>
-	  <th>激活日期</th>
-	  <th>最近登录日期</th>
-	  <th>最近登录IP</th>
-	</tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-		<td><%= link_to user.username,user %></td>
-		<td><%= user.email %></td>
-		<td><%= admin_radio_tag user %></td>
-		<td><%= l user.created_at.to_date,:format => :long %></td>
-		<td><% if user.confirmed_at %><%= l user.confirmed_at.to_date,:format => :long %><% end %></td>
-		<td><% if user.current_sign_in_at %><%= l user.current_sign_in_at.to_date,:format => :long %><% end %></td>
-		<td><%= user.current_sign_in_ip %></td>
+<div class="span9" id="admin-main">
+  <div class="page-header">
+    <h1>用户管理</h1>
+  </div>
+  <%= form_tag(users_path,:method => "get",:class => "form-inline",:id => "user-query-form") do %>
+    <label class = "control-label">输入用户名或邮箱</label>
+    <%= text_field_tag(:q,params[:q],:class => "span4") %>
+    <%= submit_tag "搜索用户",:class=>"btn btn-primary" %>
+  <% end %>
+  <div id="users-main">
+  <table class="table table-bordered table-striped">
+    <thead>
+	  <tr>
+        <th>用户名</th>
+	    <th>邮箱</th>
+	    <th>是否管理员</th>
+	    <th>注册日期</th>
+	    <th>激活日期</th>
+	    <th>最近登录日期</th>
+	    <th>最近登录IP</th>
 	  </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= will_paginate @users,:class => "pagination pagination-right",:id=>"users-pagination" %>
-<%= form_tag authority_user_path(0),:method => :put ,:remote => true,:id => "authority-user-form" do %>
-  <%= hidden_field_tag(:admin,params[:admin]) %>
-<% end %>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+		  <td><%= link_to user.username,user_path(user.username) %></td>
+		  <td><%= user.email %></td>
+		  <td><%= admin_radio_tag user %></td>
+		  <td><%= l user.created_at.to_date,:format => :long %></td>
+		  <td><% if user.confirmed_at %><%= l user.confirmed_at.to_date,:format => :long %><% end %></td>
+		  <td><% if user.current_sign_in_at %><%= l user.current_sign_in_at.to_date,:format => :long %><% end %></td>
+		  <td><%= user.current_sign_in_ip %></td>
+	    </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @users,:class => "pagination pagination-right",:id=>"users-pagination" %>
+  </div>
+  <%= form_tag authority_user_path(0),:method => :put ,:remote => true,:id => "authority-user-form" do %>
+    <%= hidden_field_tag(:admin,params[:admin]) %>
+  <% end %>
+</div>

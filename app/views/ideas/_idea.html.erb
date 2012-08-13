@@ -2,8 +2,8 @@
   <div class="span9 seperator"></div>
   <div class="span2">
 	<ul class="unstyled user-info">
-	  <li><%= link_to image_tag(idea.user.avatar.url(:small),:class=>"profile_picture"),user_path(idea.user) %></li>
-	  <li><%= link_to idea.user.username,user_path(idea.user) %></li>
+	  <li><%= link_to image_tag(idea.user.avatar.url(:small),:class=>"profile_picture"),user_path(idea.user.username) %></li>
+	  <li><%= link_to idea.user.username,user_path(idea.user.username) %></li>
 	  <li class="shallow"><%= idea.user.description %></li>
       <li>
         <% if idea.user.website %><%= link_to image_tag("icon_world_link.png"),idea.user.website,"rel"=>"tooltip","data-original-title"=>"个人主页","data-placement"=>"top" %><% end %>
@@ -13,7 +13,7 @@
   </div>
   <div class="span7">
 
-    <%= render :partial => "form",:locals => {:idea => idea } %>
+    <%= render :partial => "ideas/form",:locals => {:idea => idea } %>
 
     <% if user_signed_in? %> 
       <div class="row">

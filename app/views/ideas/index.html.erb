@@ -1,18 +1,38 @@
-<%= flash_msg_tag flash[:alert],"alert-error" %>
-<%= flash_msg_tag flash[:notice],"alert-success" %>
-<ul class="nav nav-tabs" id="nav-status">
-  <%= tab_item_tag IDEA_STATUS_UNDER_REVIEW,@status do %><%= link_to '新发布',tab_ideas_path(:status => IDEA_STATUS_UNDER_REVIEW),:remote=>true %><% end %>
-  <%= tab_item_tag IDEA_STATUS_REVIEWED_SUCCESS,@status do %><%= link_to '投票中',tab_ideas_path(:status => IDEA_STATUS_REVIEWED_SUCCESS),:remote=>true  %><% end %>
-  <%= tab_item_tag IDEA_STATUS_LAUNCHED,@status do %><%= link_to '已实施',tab_ideas_path(:status => IDEA_STATUS_LAUNCHED),:remote=>true  %><% end %>
-</ul>
 <div class="row">
-  <div class="span2 offset7">
-    <%= form_tag tab_ideas_path,:method => :get ,:remote => true,:id=>"ideas-sort-form" do %>    
-      <%= select_tag(:sort, options_for_select([['最热门', IDEAS_SORT_HOT], ['最新的', IDEAS_SORT_NEWEST]]),:class=>"span2",:id=>"ideas-sort-select") %>
-    <% end %>
+  <div class="span9">
+    <%= flash_msg_tag flash[:alert],"alert-error" %>
+    <%= flash_msg_tag flash[:notice],"alert-success" %>
   </div>
 </div>
-<div id="ideas-main">
-  <%= render @ideas %>
-  <%= will_paginate @ideas,:class => "pagination pagination-right",:id => "ideas-pagination",:params => {:controller => "ideas",:action => "tab",:status => IDEA_STATUS_REVIEWED_SUCCESS} %>
-</div>
+<% @topics.each do |topic| %>
+  <section class="section-topic">
+    <div class="page-header">
+	  <h1><%= link_to image_tag(topic.logo.url(:small),:class=>"profile_picture"),topic_path(topic.name) %> <%= link_to topic.name,topic_path(topic.name)%></h1>
+	</div>
+	<div class="row">
+      <% topic.status_ideas.each do |status,idea| %>
+	    <div class="span4">
+		  <h2><%= I18n.t("app.idea.status.#{status}") %></h2>
+          <% if idea %>
+		    <div class="home-user"><%= link_to image_tag(idea.user.avatar.url(:small),:class=>"profile_picture"),user_path(idea.user.username) %><%= link_to idea.user.username,user_path(idea.user.username),:class=>"home-user-name" %></div>
+		    <div class="home-idea-title"><%= link_to idea.title,idea,:title => idea.title %></div>
+		    <div class="home-idea-entry"><%= auto_link(idea.description) %></div>
+          <% else %>
+            <p><span class="label label-warning">还有没有主意！</span></p>
+			<p>如果你有什么好主意，赶紧<a href="javascript:;">发布</a>吧。</p>
+          <% end %>
+	    </div>
+      <% end %>
+	</div>
+  </section>
+<% end %>
+<section id="tags" class="section-topic">
+  <div class="page-header">
+	<h1>标签</h1>
+  </div>
+  <ul class="unstyled home-tags">
+    <% @tags.each do |tag| %>
+	  <li><i class="icon-tag"></i>&nbsp;<%= link_to tag.name,tag_path(tag.name) %><span class="shallow">&nbsp;x&nbsp;<%= tag.ideas_count %></span></li>
+    <% end %>
+  </ul>
+</section>

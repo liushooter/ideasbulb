@@ -21,4 +21,8 @@ module ApplicationHelper
     options = options.merge(:class => "active") if expectation == actual
     content_tag(:li,options,&block) 
   end
+
+  def title(page_title)
+    content_for :title, page_title.to_s
+  end
 end

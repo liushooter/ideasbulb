@@ -78,25 +78,8 @@ initStatusTab = ->
  $('#nav-status a')
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
    showIndicator('#ideas-main')
-   activeLinkParam = getActiveLinkParam('#nav-owner-ideas')
-   settings.url = settings.url+"&"+(activeLinkParam or= getActiveLinkParam('#nav-topic-ideas'))+"&sort="+$('#ideas-sort-select').val()
+   settings.url = settings.url+"&sort="+$('#ideas-sort-select').val()
    active(this))
-  .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
-
-initRightNav = ->
- $('#nav-owner-ideas a')
-  .bind("ajax:beforeSend",(evt,xhr,settings) ->
-   showIndicator('#ideas-main')
-   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')+"&sort="+$('#ideas-sort-select').val()
-   $('#nav-topic-ideas').children().removeClass("active").find("i").removeClass("icon-white")
-   active(this))
-  .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
- $('#nav-topic-ideas a')
-  .bind("ajax:beforeSend",(evt,xhr,settings) ->
-   showIndicator('#ideas-main')
-   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')+"&sort="+$('#ideas-sort-select').val()
-   $('#nav-owner-ideas').children().removeClass("active")
-   activeIcon(this))
   .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
 
 initSortSelect = ->
@@ -105,9 +88,7 @@ initSortSelect = ->
  sortForm
   .bind("ajax:beforeSend",(evt,xhr,settings) ->
    showIndicator('#ideas-main')
-   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status')
-   activeLinkParam = getActiveLinkParam('#nav-owner-ideas')
-   settings.url = settings.url+"&"+(activeLinkParam or= getActiveLinkParam('#nav-topic-ideas')))
+   settings.url = settings.url+"&"+getActiveLinkParam('#nav-status'))
   .bind("ajax:success",(evt,data,status,xhr) -> initIdeas(xhr.responseText))
 
 initIdeas = (html) ->
@@ -115,7 +96,6 @@ initIdeas = (html) ->
   fillIdeas(html)
  else
   initStatusTab()
-  initRightNav()
   initSortSelect()
  $('.comment-btn').click -> showForm("#add-comment-",this)
  $('.solution-btn').click -> showForm("#add-solution-",this)
