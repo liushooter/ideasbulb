@@ -24,7 +24,7 @@
             <% end %>
 		  <% end %>
           <% if Topic.count > 0 %>
-		    <h4>主题</h4>
+		    <h4>话题</h4>
 		    <ul class="unstyled topics">
               <% Topic.all.each do |topic| %>
 			    <li><i class="icon-comment"></i>&nbsp;<%= link_to topic.name,topic_path(topic.name) %></li>

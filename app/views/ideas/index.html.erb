@@ -1,3 +1,4 @@
+<% title "主页 - #{Preference.option(PREFERENCE_SITE_NAME)}" %>
 <div class="row">
   <div class="span9">
     <%= flash_msg_tag flash[:alert],"alert-error" %>
@@ -19,7 +20,7 @@
 		    <div class="home-idea-entry"><%= auto_link(idea.description) %></div>
           <% else %>
             <p><span class="label label-warning">还有没有主意！</span></p>
-			<p>如果你有什么好主意，赶紧<a href="javascript:;">发布</a>吧。</p>
+			<p>如果你有什么好主意，赶紧<a href="javascript:;" data-toggle="modal" data-target="#modal-add-idea">发布</a>吧。</p>
           <% end %>
 	    </div>
       <% end %>
