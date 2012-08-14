@@ -1,15 +1,26 @@
-<% title "站内搜索 - #{Preference.option(PREFERENCE_SITE_NAME)}" %>
-<div class="row">
-<div class="span9">
-  <%= form_tag(search_ideas_path,:method => "get",:class=>"form-search well",:style=>"text-align:center") do %>
-    <%=text_field_tag(:q,@query,:class=> "input-xlarge search-query") %>
-    <%= button_tag "搜索主意",:class=>"btn" %>
-  <% end %>
-  <div id="ideas-main">
-    <%= render @ideas %>
-    <%= will_paginate @ideas,:class => "pagination pagination-right",:params => {:controller => "ideas",:action => "search",:q => @query} %>
+<%= render :partial => "common/search_form",:locals => {:which_tab => "idea-search-tab" } %>
+<% if @ideas %>
+  <div id="search-ideas">
+    <% @ideas.each do |idea| %>
+	  <div>
+		<div class="seperator"></div>
+		<div class="idea-title"><%= link_to idea.title,idea,:title=>idea.title%></div>
+		<div class="idea-label">
+          <%= status_span_tag idea %>
+          <span><i class="icon-comment"></i>&nbsp;<%= idea.topic.name %></span>
+          <% if idea.tags.any? %>
+            <span><i class="icon-tags"></i>
+              <% idea.tags.each do |tag| %>
+                <%= tag.name %>
+              <% end %>
+            </span>
+          <% end %>
+          <span>解决方案(<%= idea.solutions_count %>)</span>
+          <span>评论(<%= idea.comments_count %>)</span>
+		</div>
+	  </div>
+    <% end %>
   </div>
-</div>
-<div class="span3">
-</div>
-</div>
+<% else %>
+  <p style="text-align:center">抱歉，没有结果。</p>
+<% end %>

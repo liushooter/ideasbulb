@@ -1,0 +1,20 @@
+<%= render :partial => "common/search_form",:locals => {:which_tab => "user-search-tab" } %>
+<% if @users %>
+  <div id="search-users">
+    <% @users.each do |user| %>
+	  <div class="row" style="margin-bottom:10px;">
+        <div class="span9 seperator"></div>
+		  <div class="span1">
+            <%= link_to image_tag(user.avatar.url(:small),:class=>"profile_picture"),user_path(user.username) %>
+		  </div>
+		  <div class="span8">
+            <div class="user-title"><%= link_to user.username,user_path(user.username) %></div>
+		    <div class="user-label"><span><%= role_tag user %></span><span>积分(<%= user.points %>)</span><span>发布的主意(<%= user.ideas.count %>)</span><span>关注的主意(<%= user.favored_ideas.count %>)</span><span>解决方案(<%= user.solutions.count %>)</span><span>评论(<%= user.comments.count %>)</span>
+		  </div>
+		</div>
+	  </div>
+    <% end %>
+  </div>
+<% else %>
+  <p style="text-align:center">抱歉，没有结果。</p>
+<% end %>

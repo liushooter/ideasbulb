@@ -89,15 +89,15 @@ div.seperator{
 div.head-title{
  margin-bottom:30px;
 }
-div.idea-title{
+div.idea-title,div.user-title{
   font-size: 18px;
   line-height: 20px;
   font-weight: 100;
 }
-div.idea-label,div.idea-info,div.idea-entry{
+div.idea-label,div.idea-info,div.idea-entry,div.user-label{
   margin:5px 0;
 }
-div.idea-label span{
+div.idea-label span,div.user-label span{
  margin-right:10px;
 }
 ul.actions{

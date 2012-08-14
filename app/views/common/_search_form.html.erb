@@ -1,0 +1,21 @@
+<% title "站内搜索 - #{Preference.option(PREFERENCE_SITE_NAME)}" %>
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <%= element_active_tag :li,"idea-search-tab",which_tab do %><a href="#idea-search-tab" data-toggle="tab">主意</a><% end %>
+    <%= element_active_tag :li,"user-search-tab",which_tab do %><a href="#user-search-tab" data-toggle="tab">用户</a><% end %>
+  </ul>
+  <div class="tab-content">
+    <%= element_active_tag :div,"idea-search-tab",which_tab,{:class=>"tab-pane",:id=>"idea-search-tab"} do %>
+      <%= form_tag(search_ideas_path,:method => "get",:class=>"form-search well",:style=>"text-align:center") do %>
+        <%=text_field_tag :q,@idea_query,:class=> "input-xlarge search-query",:placeholder => '搜索主意...' %>
+        <%= button_tag "搜索",:class=>"btn" %>
+      <% end %>
+    <% end %>
+    <%= element_active_tag :div,"user-search-tab",which_tab,{:class=>"tab-pane",:id=>"user-search-tab"} do %>
+      <%= form_tag(search_users_path,:method => "get",:class=>"form-search well",:style=>"text-align:center") do %>
+        <%=text_field_tag :q,@user_query,:class=> "input-xlarge search-query",:placeholder => '搜索用户...' %>
+        <%= button_tag "搜索",:class=>"btn" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

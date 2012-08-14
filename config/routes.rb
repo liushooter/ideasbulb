@@ -20,6 +20,7 @@ Ideasbulb::Application.routes.draw do
   resources :users do
     put 'authority',:on => :member
     get 'inbox',:on => :collection
+    match 'search',:on => :collection
   end
   resources :preferences do
     get 'dashboard',:on => :collection

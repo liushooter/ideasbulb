@@ -55,6 +55,7 @@ zh-CN:
         zero_ideas: "不能删除主意数量不为零的话题"
         logo_file_size: "最大为50KB"
         logo_content_type: "只能为JPEG和PNG"
+        name_format: "不能包含. /"
       user:
         username_format: "只能包含字母和数字"
         avatar_file_size: "最大为50KB"
@@ -65,6 +66,7 @@ zh-CN:
         pick_solution: "请选择实施主意的方案"
         launched: "主意已经实施，不能再修改状态"
         edit: "是实施中或已实施的主意不能被修改"
+        tags_format: "不能包含. /"
       solution:
         create: "实施中或已实施的主意不能添加建议"
         update: "实施中或已实施的主意不能修改其建议"

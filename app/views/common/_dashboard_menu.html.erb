@@ -1,0 +1,18 @@
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <%= element_active_tag :li,"home",which_menu do %> 
+        <%= link_to dashboard_preferences_path do %><%= icon_white_tag "home",which_menu,"icon-home" %> 首页<% end %>
+      <% end %>
+      <%= element_active_tag :li,"topic",which_menu do %> 
+	    <%= link_to topics_path do %><%= icon_white_tag "topic",which_menu,"icon-comment" %> 话题管理<% end %>
+      <% end %>
+      <%= element_active_tag :li,"user",which_menu do %> 
+	    <%= link_to users_path do %><%= icon_white_tag "user",which_menu,"icon-user" %> 用户管理<% end %></li>
+      <% end %>
+      <%= element_active_tag :li,"cog",which_menu do %> 
+	    <%= link_to preferences_path do %><%= icon_white_tag "cog",which_menu,"icon-cog" %> 站点设置<% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

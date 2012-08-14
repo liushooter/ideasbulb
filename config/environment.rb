@@ -15,4 +15,4 @@ USER_NEW_COMMENT_POINTS = 1
 USER_VOTE_POINTS = 1
 IDEAS_SORT_HOT = 'hot'
 IDEAS_SORT_NEWEST = 'new'
-
+SEARCH_SOLR_FILTER = /&&|\|\||[\+\-!\(\)\{\}\[\]\^"~\*\?:\\]/

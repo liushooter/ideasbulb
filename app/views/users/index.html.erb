@@ -1,14 +1,5 @@
 <% title "用户管理 - 控制面板" %>
-<div class="span3">
-  <div class="well sidebar-nav">
-    <ul class="nav nav-list">
-      <li><%= link_to dashboard_preferences_path do %><i class="icon-home"></i> 首页<% end %></li>
-	  <li><%= link_to topics_path do %><i class="icon-comment"></i> 话题管理<% end %></li>
-	  <li class="active"><%= link_to users_path do %><i class="icon-user icon-white"></i> 用户管理<% end %></li>
-	  <li><%= link_to preferences_path do %><i class="icon-cog"></i> 站点设置<% end %></li>
-    </ul>
-  </div>
-</div>
+<%= render :partial => "common/dashboard_menu",:locals => {:which_menu => "user" } %>
 <div class="span9" id="admin-main">
   <div class="page-header">
     <h1>用户管理</h1>

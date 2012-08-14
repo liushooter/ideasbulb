@@ -7,14 +7,14 @@ class Idea < ActiveRecord::Base
   has_many :comments,:order => "created_at desc"
   has_many :solutions,:order => "pick desc,points desc,created_at desc"
 
-  self.per_page = 5
+  self.per_page = 30
 
   attr_accessor :is_handle
   attr_accessor :tmp_tag_ids
 
   validates :title,:presence =>true,:length => {:maximum => 60}
   validates :description,:presence =>true,:length => {:maximum => 2000}
-  validate :tags_number_not_greater_than_three
+  validate :tags_valid_format,:tags_number_not_greater_than_three
 
   after_create do |idea|
     User.update_points(idea.user_id,USER_NEW_IDEA_POINTS)
@@ -50,6 +50,15 @@ class Idea < ActiveRecord::Base
 
   def tag_names
     tags.map(&:name).join(' ')
+  end
+
+  def tags_valid_format
+    self.tags.each do |tag|
+      if tag.name.index(/[.\/]/)
+        errors.add(:tags,I18n.t('app.error.idea.tags_format'))
+        break
+      end
+    end    
   end
 
   def tags_number_not_greater_than_three

@@ -17,9 +17,16 @@ module ApplicationHelper
     end
   end
 
-  def tab_item_tag(expectation,actual,options={},&block)
-    options = options.merge(:class => "active") if expectation == actual
-    content_tag(:li,options,&block) 
+  def element_active_tag(element,expectation,actual,options={},&block)
+    cssClass ="active "
+    cssClass += options[:class] if options[:class]
+    options = options.merge(:class => cssClass) if expectation == actual
+    content_tag(element,options,&block) 
+  end
+
+  def icon_white_tag(expectation,actual,cssClass)
+    cssClass = cssClass + " icon-white" if expectation == actual
+    content_tag(:i,"",:class => cssClass)
   end
 
   def title(page_title)

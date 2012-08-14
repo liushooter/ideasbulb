@@ -43,4 +43,13 @@ class UsersController < ApplicationController
     render :layout => false if request.xhr?
   end
 
+  def search
+    @users = nil
+    if !params[:q].empty?
+      @users = User.where("username like ? OR email like ?","%#{params[:q]}%","%#{params[:q]}%").paginate(:page => params[:page])
+    end
+    @user_query = params[:q]
+    render :layout => "list"
+  end
+
 end

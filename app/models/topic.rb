@@ -3,6 +3,7 @@ class Topic < ActiveRecord::Base
   has_attached_file :logo, :styles => { :medium => "120x120#", :small => "50x50#"},:url => "/system/:attachment/:id/:style/:filename",:whiny => false
 
   validates :name,:presence =>true,:length => {:maximum => 30}
+  validate :name_valid_format
   validates :description,:length => {:maximum => 160}
   validates_format_of :website, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,:allow_blank => true
   validates :logo,:attachment_content_type => {:content_type=>["image/jpeg","image/png"],:message => I18n.t('app.error.topic.logo_content_type')},:attachment_size => { :less_than => 50.kilobytes,:message => I18n.t('app.error.topic.logo_file_size') }
@@ -13,6 +14,10 @@ class Topic < ActiveRecord::Base
       errors[:base] << I18n.t('app.error.topic.zero_ideas')
       false
     end
+  end
+
+  def name_valid_format
+    errors.add(:name,I18n.t('app.error.topic.name_format')) if self.name.index(/[.\/]/)
   end
 
   before_save do |topic|

@@ -7,12 +7,19 @@ class IdeasController < ApplicationController
   end
 
   def search
-    search = Idea.search do
-      keywords params[:q]
-      paginate :page => params[:page],:per_page => Idea.per_page 
+    params[:q] = params[:q].gsub(SEARCH_SOLR_FILTER,'')
+    @ideas = nil
+    if !params[:q].empty?
+      search = Idea.search do
+        fulltext params[:q] do
+          boost_fields :title => 2.0,:description => 1.0
+        end
+        paginate :page => params[:page],:per_page => Idea.per_page 
+      end
+      @ideas = search.results
     end
-    @ideas = search.results
-    @query = params[:q]
+    @idea_query = params[:q]
+    render :layout => "list"
   end
 
   def promotion
